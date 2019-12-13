@@ -1,8 +1,8 @@
 var client = require('./client.js');
 var controller = require('./controller.js');
 
-
 request = controller.inputToCommand();
+
 if (request) {
     createRequest(request.id, request.method, request.params);
 }

@@ -31,8 +31,7 @@ var allParams = ["power",
 ];
 
 exports.inputToCommand = function () {
-    let command = new Object();
-
+    let id = 0;
     let args = inputToArray();
     let func = args[0];
     let params = [];
@@ -41,16 +40,70 @@ exports.inputToCommand = function () {
         params.push(args[i]);
     }
 
-    command.id = 0;
+    if (func == "help") {
+        if (params == "") {
+            printHelp();
+        } else if (params[0] == "commands") {
+            printCommandHelp();
+        }
+        process.exit(0);
+    } else {
+        let command = createNewCommand(id, func, params);
+        if (command.method) {
+            return command;
+        } else {
+            console.log("Entrada incorrecta: " + func);
+            process.exit(0);
+        }
+    }
+}
+
+function printHelp() {
+    console.log("Programa de linea de comandos para controlar bombilla Yeelight.\r\n");
+    console.log("El formato de los comandos a ejecutar es el siguiente: ");
+    console.log("   - npm run yeelight <command> [params]");
+    console.log("   - npm start <command> [params]\r\n");
+    console.log("Para ver la lista de comandos permitidos utilizar el comando: ");
+    console.log("     npm run yeelight help commands\r\n");
+}
+
+function printCommandHelp() {
+    console.log("COMMANDS");
+    console.log("    on        - Enciende la bombilla");
+    console.log("    off       - Apaga la bombilla");
+    console.log("    toggle    - Cambia el estado de la bombilla");
+    console.log("    <color>   - Cambia a un color concreto");
+    console.log("                Parametros: {red | green | blue | white | orange | yellow}")
+    console.log("    rgb       - Cambia a un color en formato RGB");
+    console.log("                Parametros: R = [0 - 255] G = [0 - 255] B = [0 - 255]")
+    console.log("    get       - Solicita los parametros a la bombilla");
+    console.log("    bright    - Cambia el valor del brillo");
+    console.log("                Parametros: Brillo = [0 - 100]");
+    console.log("    temp      - Cambia el valor de la temperatura de la luz");
+    console.log("                Parametros: Temperatura = [1700 (Rojo) - 6500 (Azul)]");
+    console.log("    hsv       - Cambia a un color en formato HSV ");
+    console.log("                Parametros: Hue = [0 - 359]");
+    console.log("                            Saturation = [0 - 100]");
+    console.log("    startflow - Inicia el modo color flow");
+    console.log("    stopflow  - Para el modo de color flow");
+    console.log("    cronadd   - Inicia timer para apagar la bombilla");
+    console.log("    cronget   - Recupera el valor del timer actual");
+    console.log("    crondel   - Elimina el timer actual");
+    console.log("    adjust    - Ajusta el valor sin saber el actual");
+    console.log("                Parametros: Accion = {increase | decrease | circle}");
+    console.log("                            Propiedad = {bright | ct | color}");
+    console.log("    name      - Cambia el nombre local de la bombilla");
+    console.log("                Parametros: Nombre");
+    console.log("\r\n");
+
+}
+
+function createNewCommand(id, func, params) {
+    let command = new Object();
+    command.id = id;
     command.method = getMethod(func);
     command.params = getParams(func, params);
-
-    if (command.method) {
-        return command;
-    } else {
-        console.log("Entrada incorrecta: " + func);
-        process.exit(0);
-    }
+    return command;
 }
 
 function inputToArray() {
@@ -86,6 +139,33 @@ function getMethod(func) {
         case 'bright':
             method = "set_bright";
             break;
+        case 'temp':
+            method = "set_ct_abx";
+            break;
+        case 'hsv':
+            method = "set_hsv";
+            break;
+        case 'startflow':
+            method = "start_cf";
+            break;
+        case 'stopflow':
+            method = "stop_cf";
+            break;
+        case 'cronadd':
+            method = "cron_add";
+            break;
+        case 'cronget':
+            method = "cron_get";
+            break;
+        case 'crondel':
+            method = "cron_del";
+            break;
+        case 'adjust':
+            method = "set_adjust";
+            break;
+        case 'name':
+            method = "set_name";
+            break;
     }
     if (method) {
         return method;
@@ -104,6 +184,7 @@ function getParams(func, values) {
             params = ["off"];
             break;
         case 'toggle':
+        case 'stopflow':
             params = [];
             break;
         case 'color':
@@ -129,6 +210,39 @@ function getParams(func, values) {
             let brightness = getBrightness(values);
             params.push(brightness);
             break;
+        case 'temp':
+            let temperature = getTemperature(values);
+            params.push(temperature);
+            break;
+        case 'hsv':
+            let hue = getHue(values);
+            let sat = getSaturation(values);
+            params.push(hue);
+            params.push(sat);
+            break;
+        case 'startflow':
+            params.push(4);
+            params.push(0);
+            params.push("1000, 2, 2700, 100, 500, 1,255, 10, 5000, 7, 0,0, 500, 2, 5000, 1");
+            break;
+        case 'cronadd':
+            params.push(0); //Apagar la bombilla, valor fijo
+            let minutes = getMinutes(values);
+            params.push(minutes);
+        case 'cronget':
+        case 'crondel':
+            params.push(0); //Apagar la bombilla, valor fijo
+            break;
+        case 'adjust':
+            let action = getAction(values);
+            let prop = getProperties(values);
+            params.push(action);
+            params.push(prop);
+            break;
+        case 'name':
+            let name = getName(values);
+            params.push(name);
+            break;
     }
     if (params) {
         return params;
@@ -138,8 +252,30 @@ function getParams(func, values) {
     }
 }
 
-function getColor(values) {
+function getAction(values){
+    let action = values[0];
+    if (action !== 'increase' && action !=='decrease' && action !=='circle'){
+        console.log("Valor de accion incorrecto para la funcion adjust: " + action);
+        process.exit(0);
+    }
+    return action;
+}
 
+function getProperties(values){
+    let properties = values[1];
+    if (properties !== 'bright' && properties !=='ct' && properties !== 'color'){
+        console.log("Valor de propiedad incorrecto para la funcion adjust: " + values[0]);
+        process.exit(0);
+    }
+    return properties;
+}
+
+function getName(values){
+    let name = values[0];
+    return name;
+}
+
+function getColor(values) {
     let colorCommand = values[0].toString();
     console.log("valor:" + colorCommand);
     let color = [];
@@ -171,7 +307,6 @@ function getColor(values) {
 function calculateRGBColor(red, green, blue) {
     let RGBValue = (red * 65536) + (green * 256) + blue;
     return parseInt(RGBValue);
-
 }
 
 function parseRGB(values) {
@@ -184,56 +319,73 @@ function parseRGB(values) {
 }
 
 function getBrightness(values) {
-    let brightness = validateBrightness(values[0]);
-    if (Number.isInteger(brightness)) {
-        return brightness;
-    } else {
+    let brightness = validateRange(values[0], 0, 100);
+    if (!Number.isInteger(brightness)) {
         console.log("Parametros insuficientes para el brillo: " + values);
         process.exit(0);
+
     }
+    return brightness;
 }
 
-function validateBrightness(value) {
-    let brightness = parseInt(value);
-
-    if (brightness > 100) {
-        brightness = 100;
-    } else if (brightness < 0) {
-        brightness = 0;
+function getHue(values) {
+    let hue = validateRange(values[0], 0, 359);
+    if (!Number.isInteger(hue)) {
+        console.log("Parametros insuficientes para la temperatura: " + values);
+        process.exit(0);
     }
-    if (isNaN(brightness)) {
-        console.log("Valor de brillo incorrecto.\r\nBrightness: " + value);
+    return hue;
+}
+
+function getSaturation(values) {
+    let saturation = validateRange(values[0], 0, 100);
+    if (!Number.isInteger(saturation)) {
+        console.log("Parametros insuficientes para la saturacion: " + values);
+        process.exit(0);
+    }
+    return saturation;
+}
+
+function getMinutes(values) {
+    let minutes = validateRange(values[0], 0, 1440);
+    if (!Number.isInteger(minutes)) {
+        console.log("Parametros insuficientes para los minutos: " + values);
+        process.exit(0);
+    }
+    return minutes;
+}
+
+function getTemperature(values) {
+    let temperature = validateRange(values[0], 1700, 6500);
+    if (!Number.isInteger(temperature)) {
+        console.log("Parametros insuficientes para la temperatura: " + values);
+        process.exit(0);
+    }
+    return temperature;
+}
+
+function validateRange(value, min, max) {
+    let validValue = parseInt(value);
+
+    if (isNaN(value)) {
+        console.log("Valor entrado incorrecto: " + value);
         process.exit(0);
     }
 
-    return brightness;
+    if (validValue > max) {
+        validValue = max;
+    } else if (validValue < min) {
+        validValue = min;
+    }
+    return validValue;
 }
 
 function validateRGB(r, g, b) {
     let RGB = [];
 
-    let red = parseInt(r);
-    let green = parseInt(g);
-    let blue = parseInt(b);
-
-    if (red > 255) {
-        red = 255;
-    } else if (red < 0) {
-        red = 0;
-    }
-
-    if (green > 255) {
-        green = 255;
-    } else if (green < 0) {
-        green = 0;
-    }
-
-    if (blue > 255) {
-        blue = 255;
-        console.log("entra por mayor de 255: " + blue);
-    } else if (blue < 0) {
-        blue = 0;
-    }
+    let red = validateRange(r, 0, 255);
+    let green = validateRange(g, 0, 255);
+    let blue = validateRange(b, 0, 255);
 
     if ((red + green + blue) == 0) {
         console.log("Aviso: Los valores entrados para RGB son incorrectos\r\nRed: " + red + "\r\nGreen: " + green + "\r\nBlue: " + blue);

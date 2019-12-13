@@ -14,7 +14,8 @@ socket.on('error', function (err) {
 })
 
 socket.on('data', function (data) {
-    console.log("Received data: " + data.toString());
+    let message = data.toString();
+    console.log("Received data: " + message);
     socket.end();
 })
 
