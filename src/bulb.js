@@ -1,5 +1,5 @@
-var client = require('./client.js');
-var controller = require('./controller.js');
+const client = require('./client.js');
+const controller = require('./controller.js');
 
 request = controller.inputToCommand();
 

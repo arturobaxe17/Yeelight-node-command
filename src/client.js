@@ -1,9 +1,11 @@
 const net = require('net');
 
-var port = 55443;
-var host = '192.168.0.100';
+const connection = {
+    port: 55443,
+    host: '192.168.0.100'
+}
 
-var socket = net.connect(port, host, function () {
+var socket = net.connect(connection.port, connection.host, function () {
     let address = socket.address();
    // console.log("Connected to " + host + ":" + port);
 })
@@ -15,11 +17,14 @@ socket.on('error', function (err) {
 
 socket.on('data', function (data) {
     let message = data.toString();
-    console.log("Received data: " + message);
+    let printMessage =  JSON.stringify(JSON.parse(message),null,3);
+    console.log("\r\nData: \r\n" + printMessage);
     socket.end();
 })
 
 exports.sendRequest = function(request){
-    console.log(request);
+    let printRequest = JSON.stringify(JSON.parse(request),null,3);
+    
+    console.log(printRequest);
     socket.write(request);
 }

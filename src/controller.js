@@ -1,10 +1,4 @@
-const functions = ['on',
-    'off',
-    'toggle',
-    'get',
-    'rgb',
-    'color',
-    'bright'];
+var help = require('./help.js');
 
 var allParams = ["power",
     "bright",
@@ -40,11 +34,11 @@ exports.inputToCommand = function () {
         params.push(args[i]);
     }
 
-    if (func == "help") {
+    if (func == 'help') {
         if (params == "") {
-            printHelp();
-        } else if (params[0] == "commands") {
-            printCommandHelp();
+            help.printHelp('general');
+        } else if (params[0] == 'commands') {
+            help.printHelp('commands');
         }
         process.exit(0);
     } else {
@@ -58,45 +52,6 @@ exports.inputToCommand = function () {
     }
 }
 
-function printHelp() {
-    console.log("Programa de linea de comandos para controlar bombilla Yeelight.\r\n");
-    console.log("El formato de los comandos a ejecutar es el siguiente: ");
-    console.log("   - npm run yeelight <command> [params]");
-    console.log("   - npm start <command> [params]\r\n");
-    console.log("Para ver la lista de comandos permitidos utilizar el comando: ");
-    console.log("     npm run yeelight help commands\r\n");
-}
-
-function printCommandHelp() {
-    console.log("COMMANDS");
-    console.log("    on        - Enciende la bombilla");
-    console.log("    off       - Apaga la bombilla");
-    console.log("    toggle    - Cambia el estado de la bombilla");
-    console.log("    <color>   - Cambia a un color concreto");
-    console.log("                Parametros: {red | green | blue | white | orange | yellow}")
-    console.log("    rgb       - Cambia a un color en formato RGB");
-    console.log("                Parametros: R = [0 - 255] G = [0 - 255] B = [0 - 255]")
-    console.log("    get       - Solicita los parametros a la bombilla");
-    console.log("    bright    - Cambia el valor del brillo");
-    console.log("                Parametros: Brillo = [0 - 100]");
-    console.log("    temp      - Cambia el valor de la temperatura de la luz");
-    console.log("                Parametros: Temperatura = [1700 (Rojo) - 6500 (Azul)]");
-    console.log("    hsv       - Cambia a un color en formato HSV ");
-    console.log("                Parametros: Hue = [0 - 359]");
-    console.log("                            Saturation = [0 - 100]");
-    console.log("    startflow - Inicia el modo color flow");
-    console.log("    stopflow  - Para el modo de color flow");
-    console.log("    cronadd   - Inicia timer para apagar la bombilla");
-    console.log("    cronget   - Recupera el valor del timer actual");
-    console.log("    crondel   - Elimina el timer actual");
-    console.log("    adjust    - Ajusta el valor sin saber el actual");
-    console.log("                Parametros: Accion = {increase | decrease | circle}");
-    console.log("                            Propiedad = {bright | ct | color}");
-    console.log("    name      - Cambia el nombre local de la bombilla");
-    console.log("                Parametros: Nombre");
-    console.log("\r\n");
-
-}
 
 function createNewCommand(id, func, params) {
     let command = new Object();
@@ -252,25 +207,25 @@ function getParams(func, values) {
     }
 }
 
-function getAction(values){
+function getAction(values) {
     let action = values[0];
-    if (action !== 'increase' && action !=='decrease' && action !=='circle'){
+    if (action !== 'increase' && action !== 'decrease' && action !== 'circle') {
         console.log("Valor de accion incorrecto para la funcion adjust: " + action);
         process.exit(0);
     }
     return action;
 }
 
-function getProperties(values){
+function getProperties(values) {
     let properties = values[1];
-    if (properties !== 'bright' && properties !=='ct' && properties !== 'color'){
+    if (properties !== 'bright' && properties !== 'ct' && properties !== 'color') {
         console.log("Valor de propiedad incorrecto para la funcion adjust: " + values[0]);
         process.exit(0);
     }
     return properties;
 }
 
-function getName(values){
+function getName(values) {
     let name = values[0];
     return name;
 }
@@ -305,16 +260,16 @@ function getColor(values) {
 }
 
 function calculateRGBColor(red, green, blue) {
-    let RGBValue = (red * 65536) + (green * 256) + blue;
-    return parseInt(RGBValue);
+    let RGBValue = parseInt((red * 65536) + (green * 256) + blue);
+    return RGBValue;
 }
 
 function parseRGB(values) {
     let RGB = validateRGB(values[0], values[1], values[2]);
     let color = new Object();
-    color.red = parseInt(RGB[0]);
-    color.green = parseInt(RGB[1]);
-    color.blue = parseInt(RGB[2]);
+    color.red = parseInt(RGB.red);
+    color.green = parseInt(RGB.green);
+    color.blue = parseInt(RGB.blue);
     return color;
 }
 
@@ -381,24 +336,20 @@ function validateRange(value, min, max) {
 }
 
 function validateRGB(r, g, b) {
-    let RGB = [];
+    let RGB = {}
 
-    let red = validateRange(r, 0, 255);
-    let green = validateRange(g, 0, 255);
-    let blue = validateRange(b, 0, 255);
+    RGB.red = validateRange(r, 1, 255);
+    RGB.green = validateRange(g, 1, 255);
+    RGB.blue = validateRange(b, 1, 255);
 
-    if ((red + green + blue) == 0) {
-        console.log("Aviso: Los valores entrados para RGB son incorrectos\r\nRed: " + red + "\r\nGreen: " + green + "\r\nBlue: " + blue);
+    if ((RGB.red + RGB.green + RGB.blue) == 0) {
+        console.log("Aviso: Los valores entrados para RGB son incorrectos\r\nRed: " + RGB.red + "\r\nGreen: " + RGB.green + "\r\nBlue: " + RGB.blue);
         process.exit(0);
     }
 
-    if (isNaN(red) || isNaN(green) || isNaN(blue)) {
-        console.log("Parametros insuficientes para determinar el color RGB.\r\nRed: " + red + "\r\nGreen: " + green + "\r\nBlue: " + blue);
+    if (isNaN(RGB.red) || isNaN(RGB.green) || isNaN(RGB.blue)) {
+        console.log("Parametros insuficientes para determinar el color RGB.\r\nRed: " + RGB.red + "\r\nGreen: " + RGB.green + "\r\nBlue: " + RGB.blue);
         process.exit(0);
     }
-
-    RGB.push(red);
-    RGB.push(green);
-    RGB.push(blue);
     return RGB;
 }

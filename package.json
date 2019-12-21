@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "yeelight": "node index.js",
-    "light": "node index.js",
-    "help": "node help.js"
+    "light": "node index.js"
   },
   "keywords": [
     "yeelight",
