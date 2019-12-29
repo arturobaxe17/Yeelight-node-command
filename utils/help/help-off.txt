@@ -1,0 +1,9 @@
+NOMBRE
+    off
+
+SINTAXIS
+    npm run yeelight off
+
+DESCRIPCION
+    Apaga la bombilla
+    

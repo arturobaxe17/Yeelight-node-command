@@ -1,0 +1,8 @@
+NOMBRE
+    on
+
+SINTAXIS
+    npm run yeelight on
+
+DESCRIPCION
+    Enciende la bombilla

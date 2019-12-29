@@ -1,0 +1,34 @@
+COMMANDS
+    on        - Enciende la bombilla
+    off       - Apaga la bombilla
+    toggle    - Cambia el estado de la bombilla
+    <color>   - Cambia a un color concreto
+                Parametros: {red | green | blue | white | orange | yellow}
+    rgb       - Cambia a un color en formato RGB
+                Parametros: R = [0 - 255] G = [0 - 255] B = [0 - 255]
+                            Efecto = {sudden | smooth}
+                            Duracion (segundos)
+    get       - Solicita los parametros a la bombilla
+    bright    - Cambia el valor del brillo
+                Parametros: Brillo = [0 - 100]
+                            Efecto = {sudden | smooth}
+                            Duracion (segundos)
+    temp      - Cambia el valor de la temperatura de la luz
+                Parametros: Temperatura = [1700 (Rojo) - 6500 (Azul)]
+                            Efecto = {sudden | smooth}
+                            Duracion (segundos)
+    hsv       - Cambia a un color en formato HSV 
+                Parametros: Hue = [0 - 359]
+                            Saturation = [0 - 100]
+                            Efecto = {sudden | smooth}
+                            Duracion (segundos)
+    startflow - Inicia el modo color flow
+    stopflow  - Detiene el modo de color flow
+    cronadd   - Inicia timer para apagar la bombilla
+    cronget   - Recupera el valor del timer actual
+    crondel   - Elimina el timer actual
+    adjust    - Ajusta el valor sin saber el actual
+                Parametros: Accion = {increase | decrease | circle}
+                            Propiedad = {bright | ct | color}
+    name      - Cambia el nombre local de la bombilla
+                Parametros: Nombre

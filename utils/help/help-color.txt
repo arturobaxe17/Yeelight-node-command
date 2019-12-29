@@ -1,0 +1,20 @@
+NOMBRE
+    color
+
+SINTAXIS
+    npm run yeelight <color> {red | green | blue | white | orange | yellow}
+
+DESCRIPCION
+    Cambiar el color de la luz a uno de los predefinidos en la siguiente lista:
+        - red
+        - green
+        - blue  
+        - white 
+        - orange 
+        - yellow
+
+EJEMPLO
+    Cambio de color a naranja:
+        - npm run yeelight color orange
+        - npm run yeelight orange
+    

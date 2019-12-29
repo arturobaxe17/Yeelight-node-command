@@ -1,0 +1,25 @@
+NOMBRE
+    temp
+
+SINTAXIS
+    npm run yeelight temp [temperatura] <{sudden | smooth}> <duration>
+
+DESCRIPCION
+    Cambia el color de la luz en función del valor de temperatura introducido.
+
+    Rango de valores permitido para el brillo [1700 (Rojo) - 6500 (Azul)]
+    
+    Se acepta también el parámetro de efecto, permitiendo ser:
+        - sudden: Cambia el color de la luz de inmediato
+        - smooth: Cambia el color de la luz con un intervalo definido con el parametro de duración
+    
+    El parámetro de duración solo se tendrá en cuenta con el efecto 'smooth' y el valor introducido estará en segundos.
+
+EJEMPLO
+    Cambio inmediato de color a azul :
+        - npm run yeelight temp 6500 
+        - npm run yeelight temp 6500 sudden
+    
+    Cambio de color a rojo con un intervalo de 8 segundos:
+        - npm run yeelight temp 1700 smooth 8
+    

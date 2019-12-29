@@ -1,0 +1,25 @@
+NOMBRE
+    bright
+
+SINTAXIS
+    npm run yeelight bright [brillo] <{sudden | smooth}> <duration>
+
+DESCRIPCION
+    Cambia el valor del brillo por porcentaje. 
+    
+    Rango de valores permitido para el brillo [0 - 100]
+    
+    Se acepta también el parámetro de efecto, permitiendo ser:
+        - sudden: Cambia el color de la luz de inmediato
+        - smooth: Cambia el color de la luz con un intervalo definido con el parametro de duración
+    
+    El parámetro de duración solo se tendrá en cuenta con el efecto 'smooth' y el valor introducido estará en segundos.
+
+EJEMPLO
+    Cambio inmediato de de brillo al 10%:
+        - npm run yeelight bright 10
+        - npm run yeelight bright 10 sudden
+    
+    Cambio de brillo al 20% con un intervalo de 5 segundos:
+        - npm run yeelight bright smooth 5
+    

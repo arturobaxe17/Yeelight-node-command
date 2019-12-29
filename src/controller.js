@@ -11,18 +11,20 @@ var allParams = ["power",
     "delayoff",
     "flow_params",
     "music_on",
-    "name",
-    "bg_power",
-    "bg_flowing",
-    "bg_flow_params",
-    "bg_ct",
-    "bg_lmode",
-    "bg_bright",
-    "bg_rgb",
-    "bg_hue",
-    "bg_sat",
-    "nl_br"
+    "name"
+    // "bg_power",
+    // "bg_flowing",
+    // "bg_flow_params",
+    // "bg_ct",
+    // "bg_lmode",
+    // "bg_bright",
+    // "bg_rgb",
+    // "bg_hue",
+    // "bg_sat",
+    // "nl_br"
 ];
+
+let params = [];
 
 exports.inputToCommand = function () {
     let id = 0;
@@ -35,11 +37,7 @@ exports.inputToCommand = function () {
     }
 
     if (func == 'help') {
-        if (params == "") {
-            help.printHelp('general');
-        } else if (params[0] == 'commands') {
-            help.printHelp('commands');
-        }
+        help.printHelp(params[0]);
         process.exit(0);
     } else {
         let command = createNewCommand(id, func, params);
@@ -130,7 +128,6 @@ function getMethod(func) {
 }
 
 function getParams(func, values) {
-    let params = [];
     switch (func) {
         case 'on':
             params = ["on"];
@@ -155,25 +152,19 @@ function getParams(func, values) {
             params = getColor([func]);
             break;
         case 'rgb':
-            let color = parseRGB(values);
-            params.push(calculateRGBColor(color.red, color.green, color.blue));
+            rgbParams(values);
             break;
         case 'get':
             params = allParams;
             break;
         case 'bright':
-            let brightness = getBrightness(values);
-            params.push(brightness);
+            brightParams(values);
             break;
         case 'temp':
-            let temperature = getTemperature(values);
-            params.push(temperature);
+            tempParams(values);
             break;
         case 'hsv':
-            let hue = getHue(values);
-            let sat = getSaturation(values);
-            params.push(hue);
-            params.push(sat);
+            hsvParams(values);
             break;
         case 'startflow':
             params.push(4);
@@ -207,6 +198,92 @@ function getParams(func, values) {
     }
 }
 
+function hsvParams(values) {
+    let hue = getHue(values);
+    let sat = getSaturation(values);
+    params.push(hue);
+    params.push(sat);
+
+    let effect = getEffect(values[2]);
+    if (effect) {
+        params.push(effect);
+    }
+    if (effect == 'smooth') {
+        let duration = getDuration(values[3]);
+        if (duration) {
+            params.push(duration);
+        }
+    }
+}
+
+function brightParams(values) {
+    let brightness = getBrightness(values);
+    params.push(brightness);
+    let effect = getEffect(values[1]);
+    if (effect) {
+        params.push(effect);
+    }
+    if (effect == 'smooth') {
+        let duration = getDuration(values[2]);
+        if (duration) {
+            params.push(duration);
+        }
+    }
+}
+
+function rgbParams(values) {
+    let color = parseRGB(values);
+    params.push(calculateRGBColor(color.red, color.green, color.blue));
+    let effect = getEffect(values[3]);
+    if (effect) {
+        params.push(effect);
+    }
+    if (effect == 'smooth') {
+        let duration = getDuration(values[4]);
+        if (duration) {
+            params.push(duration);
+        }
+    }
+}
+
+function tempParams(values) {
+    console.log(values);
+    let temperature = getTemperature(values);
+    params.push(temperature);
+    let effect = getEffect(values[1]);
+    if (effect) {
+        params.push(effect);
+    }
+    if (effect == 'smooth') {
+        let duration = getDuration(values[2]);
+        if (duration) {
+            params.push(duration);
+        }
+    }
+}
+
+function getDuration(inDuration) {
+    let duration = null;
+    if (inDuration) {
+        duration = parseInt(1000 * inDuration);
+    }
+    return duration;
+}
+
+function getEffect(inEffect) {
+    let effect = null;
+    if (inEffect != undefined) {
+        if (inEffect == 'smooth') {
+            effect = inEffect;
+        } else if (inEffect == 'sudden') {
+            effect = null;
+        } else {
+            console.log('Valor incorrecto para el efecto: ' + inEffect);
+        }
+    }
+    return effect;
+}
+
 function getAction(values) {
     let action = values[0];
     if (action !== 'increase' && action !== 'decrease' && action !== 'circle') {
@@ -232,7 +309,6 @@ function getName(values) {
 
 function getColor(values) {
     let colorCommand = values[0].toString();
-    console.log("valor:" + colorCommand);
     let color = [];
     switch (colorCommand) {
         case 'red':
@@ -293,7 +369,7 @@ function getHue(values) {
 }
 
 function getSaturation(values) {
-    let saturation = validateRange(values[0], 0, 100);
+    let saturation = validateRange(values[1], 0, 100);
     if (!Number.isInteger(saturation)) {
         console.log("Parametros insuficientes para la saturacion: " + values);
         process.exit(0);
@@ -336,7 +412,7 @@ function validateRange(value, min, max) {
 }
 
 function validateRGB(r, g, b) {
-    let RGB = {}
+    let RGB = {};
 
     RGB.red = validateRange(r, 1, 255);
     RGB.green = validateRange(g, 1, 255);
