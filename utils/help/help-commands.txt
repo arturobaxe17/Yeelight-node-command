@@ -21,10 +21,11 @@ COMMANDS
                 Parametros: Hue = [0 - 359]
                             Saturation = [0 - 100]
                             Efecto = {sudden | smooth}
-                            Duracion (segundos)
+                            Duracion [0 - 1440] (segundos)
     startflow - Inicia el modo color flow
     stopflow  - Detiene el modo de color flow
     cronadd   - Inicia timer para apagar la bombilla
+                Parametros: Duración (minutos)
     cronget   - Recupera el valor del timer actual
     crondel   - Elimina el timer actual
     adjust    - Ajusta el valor sin saber el actual

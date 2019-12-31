@@ -1,0 +1,14 @@
+NOMBRE
+    cronget
+
+SINTAXIS
+    npm run yeelight cronget
+
+DESCRIPCION
+    Recuper el valor en minutos del timer actual.
+
+EJEMPLO PETICION ENVIADA
+    { id: 0, method: 'cron_get', params: [ 0 ] }
+
+EJEMPLO RESPUESTA
+    { id: 0, result: [ { type: 0, delay: 60, mix: 0 } ] }

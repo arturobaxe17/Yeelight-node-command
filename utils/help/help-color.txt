@@ -13,8 +13,20 @@ DESCRIPCION
         - orange 
         - yellow
 
-EJEMPLO
+    Este comando se puede utilizar sin necesidad de escribir 'color', poniendo directamente el nombre del color al cual se quiere cambiar la bombilla.
+
+PARAMETROS
+    [0] 1. Color: color al cual se quiere cambiar. Solo se permiten los valores especificados en la lista.
+
+EJEMPLO COMANDO
     Cambio de color a naranja:
         - npm run yeelight color orange
         - npm run yeelight orange
+
+EJEMPLO PETICION ENVIADA
+    { id: 0, method: 'set_rgb', params: [ 16744192 ] }
+
+EJEMPLO RESPUESTA
+    { id: 0, result: [ 'ok' ] }
+    
     

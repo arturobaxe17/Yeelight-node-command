@@ -247,7 +247,6 @@ function rgbParams(values) {
 }
 
 function tempParams(values) {
-    console.log(values);
     let temperature = getTemperature(values);
     params.push(temperature);
     let effect = getEffect(values[1]);

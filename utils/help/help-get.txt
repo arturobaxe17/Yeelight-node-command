@@ -14,7 +14,7 @@ DESCRIPCION
         - rgb: Color. Rango [1 - 16777215]
         - hue: Hue. Rango [0 - 359]
         - sat: Saturación. Rango [0 - 100]
-        - color_mode: 1: modo rgb / 2:modo temperatura / 3:modo hsv
+        - color_mode: 1:modo rgb / 2:modo temperatura / 3:modo hsv
         - flowing: 0:flow no está ejecutándose / 1:flow ejecutándose
         - delayoff: Tiempo restante del timer. Rangp [1 - 60] (minutos)
         - flow_params: Parámetros de flujo actuales (solo con datos cuando 'flowing' es 1)

@@ -6,4 +6,9 @@ SINTAXIS
 
 DESCRIPCION
     Apaga la bombilla
-    
+
+EJEMPLO PETICION ENVIADA
+    { id: 0, method: 'set_power', params: [ 'off' ] }
+
+EJEMPLO RESPUESTA
+    { id: 0, result: [ 'ok' ] }
