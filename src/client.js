@@ -2,7 +2,7 @@ const net = require('net');
 
 const connection = {
     port: 55443,
-    host: '192.168.0.102'
+    host: '192.168.0.101'
 }
 
 var socket = net.connect(connection.port, connection.host, function () {

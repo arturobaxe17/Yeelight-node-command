@@ -20,3 +20,16 @@ DESCRIPCION
         - flow_params: Parámetros de flujo actuales (solo con datos cuando 'flowing' es 1)
         - music_on: 0:Modo música está desactivado / 1:Modo música está activado
         - name: Nombre de la bombilla. Se puede asignar con el comando "name"
+
+EJEMPLO
+    Solicitud de todos los parametros:
+        - npm run yeelight get
+    
+    Solicitud de nombre y estado de la bombilla:
+        - npm run yeelight get name power
+
+EJEMPLO PETICION ENVIADA
+    { id: 0, method: 'get_prop', params: [ 'name' ] }
+
+EJEMPLO RESPUESTA
+    { id: 0, result: [ 'bombilla-escritorio' ] }

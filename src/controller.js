@@ -1,6 +1,32 @@
-var help = require('./help.js');
+const help = require('./help.js');
 
-var allParams = ["power",
+const methodDictionary = {
+    'on': 'set_power',
+    'off': 'set_power',
+    'toggle': 'toggle',
+    'color': 'set_rgb',
+    'colour': 'set_rgb',
+    'rgb': 'set_rgb',
+    'red': 'set_rgb',
+    'green': 'set_rgb',
+    'blue': 'set_rgb',
+    'white': 'set_rgb',
+    'orange': 'set_rgb',
+    'yellow': 'set_rgb',
+    'get': 'get_prop',
+    'bright': 'set_bright',
+    'temp': 'set_ct_abx',
+    'hsv': 'set_hsv',
+    'startflow': 'start_cf',
+    'stopflow': 'stop_cf',
+    'cronadd': 'crond_add',
+    'cronget': 'cron_get',
+    'crondel': 'cron_del',
+    'adjust': 'set_adjust',
+    'name': 'set_name'
+}
+
+const allParams = ["power",
     "bright",
     "ct",
     "rgb",
@@ -12,16 +38,6 @@ var allParams = ["power",
     "flow_params",
     "music_on",
     "name"
-    // "bg_power",
-    // "bg_flowing",
-    // "bg_flow_params",
-    // "bg_ct",
-    // "bg_lmode",
-    // "bg_bright",
-    // "bg_rgb",
-    // "bg_hue",
-    // "bg_sat",
-    // "nl_br"
 ];
 
 let params = [];
@@ -50,12 +66,11 @@ exports.inputToCommand = function () {
     }
 }
 
-
 function createNewCommand(id, func, params) {
     let command = new Object();
     command.id = id;
-    command.method = getMethod(func);
-    command.params = getParams(func, params);
+    command.method = methodDictionary[func];
+    command.params = parseParams(func, params);
     return command;
 }
 
@@ -65,69 +80,7 @@ function inputToArray() {
     return args;
 }
 
-function getMethod(func) {
-    let method;
-    switch (func) {
-        case 'on':
-        case 'off':
-            method = "set_power";
-            break;
-        case 'toggle':
-            method = "toggle";
-            break;
-        case 'color':
-        case 'colour':
-        case 'rgb':
-        case 'red':
-        case 'green':
-        case 'blue':
-        case 'white':
-        case 'orange':
-        case 'yellow':
-            method = "set_rgb";
-            break;
-        case 'get':
-            method = "get_prop";
-            break;
-        case 'bright':
-            method = "set_bright";
-            break;
-        case 'temp':
-            method = "set_ct_abx";
-            break;
-        case 'hsv':
-            method = "set_hsv";
-            break;
-        case 'startflow':
-            method = "start_cf";
-            break;
-        case 'stopflow':
-            method = "stop_cf";
-            break;
-        case 'cronadd':
-            method = "cron_add";
-            break;
-        case 'cronget':
-            method = "cron_get";
-            break;
-        case 'crondel':
-            method = "cron_del";
-            break;
-        case 'adjust':
-            method = "set_adjust";
-            break;
-        case 'name':
-            method = "set_name";
-            break;
-    }
-    if (method) {
-        return method;
-    } else {
-        return false;
-    }
-}
-
-function getParams(func, values) {
+function parseParams(func, values) {
     switch (func) {
         case 'on':
             params = ["on"];
@@ -155,7 +108,7 @@ function getParams(func, values) {
             rgbParams(values);
             break;
         case 'get':
-            params = allParams;
+            getParams(values);
             break;
         case 'bright':
             brightParams(values);
@@ -180,10 +133,7 @@ function getParams(func, values) {
             params.push(0); //Apagar la bombilla, valor fijo
             break;
         case 'adjust':
-            let action = getAction(values);
-            let prop = getProperties(values);
-            params.push(action);
-            params.push(prop);
+            adjustParams(values);
             break;
         case 'name':
             let name = getName(values);
@@ -193,26 +143,61 @@ function getParams(func, values) {
     if (params) {
         return params;
     } else {
-        console.log("Parametros no encontrados comando de entrada: " + params);
+        console.log("Parametros no encontrados para la funcion: " + func + ". Parametros: " + values);
         process.exit(0);
     }
 }
 
-function hsvParams(values) {
-    let hue = getHue(values);
-    let sat = getSaturation(values);
-    params.push(hue);
-    params.push(sat);
+function getColor(values) {
+    let colorCommand = values[0].toString();
+    let color = [];
+    switch (colorCommand) {
+        case 'red':
+            color.push(calculateRGBColor(255, 0, 0));
+            break;
+        case 'green':
+            color.push(calculateRGBColor(0, 255, 0));
+            break;
+        case 'blue':
+            color.push(calculateRGBColor(0, 0, 255));
+            break;
+        case 'white':
+            color.push(calculateRGBColor(255, 255, 255));
+            break;
+        case 'orange':
+            color.push(16744192);
+            break;
+        case 'yellow':
+            color.push(calculateRGBColor(255, 255, 0));
+            break;
+        default:
+            color.push(calculateRGBColor(255, 255, 255));
+    }
+    return color;
+}
 
-    let effect = getEffect(values[2]);
+function rgbParams(values) {
+    let color = parseRGB(values);
+    params.push(calculateRGBColor(color.red, color.green, color.blue));
+    let effect = getEffect(values[3]);
     if (effect) {
         params.push(effect);
     }
     if (effect == 'smooth') {
-        let duration = getDuration(values[3]);
+        let duration = getDuration(values[4]);
         if (duration) {
             params.push(duration);
         }
+    }
+}
+
+function getParams(values) {
+    for (prop in values) {
+        params.push(values[prop]);
+    }
+
+    if (params.length == 0) {
+        params = allParams;
     }
 }
 
@@ -231,18 +216,20 @@ function brightParams(values) {
     }
 }
 
-function rgbParams(values) {
-    let color = parseRGB(values);
-    params.push(calculateRGBColor(color.red, color.green, color.blue));
-    let effect = getEffect(values[3]);
-    if (effect) {
-        params.push(effect);
+function adjustParams(values){
+    let action = getAction(values);
+    let prop = getProperties(values);
+    params.push(action);
+    params.push(prop);
+    //TODO
+    let percentage = values[2];
+    let duration = values[3];
+
+    if(percentage){
+        percentage = validateRange(percentage, -100, 100);
     }
-    if (effect == 'smooth') {
-        let duration = getDuration(values[4]);
-        if (duration) {
-            params.push(duration);
-        }
+    if(duration){
+        duration = duration * 1000;
     }
 }
 
@@ -255,6 +242,24 @@ function tempParams(values) {
     }
     if (effect == 'smooth') {
         let duration = getDuration(values[2]);
+        if (duration) {
+            params.push(duration);
+        }
+    }
+}
+
+function hsvParams(values) {
+    let hue = getHue(values);
+    let sat = getSaturation(values);
+    params.push(hue);
+    params.push(sat);
+
+    let effect = getEffect(values[2]);
+    if (effect) {
+        params.push(effect);
+    }
+    if (effect == 'smooth') {
+        let duration = getDuration(values[3]);
         if (duration) {
             params.push(duration);
         }
@@ -304,34 +309,6 @@ function getProperties(values) {
 function getName(values) {
     let name = values[0];
     return name;
-}
-
-function getColor(values) {
-    let colorCommand = values[0].toString();
-    let color = [];
-    switch (colorCommand) {
-        case 'red':
-            color.push(calculateRGBColor(255, 0, 0));
-            break;
-        case 'green':
-            color.push(calculateRGBColor(0, 255, 0));
-            break;
-        case 'blue':
-            color.push(calculateRGBColor(0, 0, 255));
-            break;
-        case 'white':
-            color.push(calculateRGBColor(255, 255, 255));
-            break;
-        case 'orange':
-            color.push(16744192);
-            break;
-        case 'yellow':
-            color.push(calculateRGBColor(255, 255, 0));
-            break;
-        default:
-            color.push(calculateRGBColor(255, 255, 255));
-    }
-    return color;
 }
 
 function calculateRGBColor(red, green, blue) {

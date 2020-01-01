@@ -1,5 +1,6 @@
 const client = require('./client.js');
 const controller = require('./controller.js');
+const newLine = '\r\n'
 
 request = controller.inputToCommand();
 
@@ -18,6 +19,6 @@ function createRequest(id, method, params) {
         request.params.push(params[param]);
     }
 
-    var jsonRequest = JSON.stringify(request) + '\r\n';
+    var jsonRequest = JSON.stringify(request) + newLine;
     client.sendRequest(jsonRequest);
 }
