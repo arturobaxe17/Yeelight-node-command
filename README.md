@@ -30,17 +30,17 @@ La lista de comandos implementados se resume en la siguiente tabla:
 | on        | Enciende la bombilla                                                             |
 | off       | Apaga la bombilla                                                                |
 | toggle    | Cambia el estado de la bombilla entre apagado y encendido                        |
-| color     | Cambia el color de la bombilla a un color concreto mediante el literal del color |
+| [color](./utils/help/md/help-color.md)     | Cambia el color de la bombilla a un color concreto mediante el literal del color |
 | rgb       | Cambia el color de la bombilla a un color concreto mediante los valores de RGB   |
 | hsv       | Cambia el color de la bombilla a un color concreto mediante los valores de HSV   |
 | [bright](./utils/help/md/help-bright.md)    | Cambia el valor del brillo de la bombilla                                        |
 | temp      | Cambia el valor de la temperatura de la luz de la bombilla                       |
-| get       | Solicita los valores de las propiedades de la bombilla                           |
+| [get](./utils/help/md/help-get.md)       | Solicita los valores de las propiedades de la bombilla                           |
 | startflow | Inicia el modo de color flow                                                     |
 | stopflow  | Detiene el modo de color flow                                                    |
-| cronadd   | Inicia un timer para apagar la bombilla                                          |
-| cronget   | Recuper el valor del timer actual                                                |
-| crondel   | Elimina el timer actual                                                          |
+| [cronadd](./utils/help/md/help-cronadd.md)   | Inicia un timer para apagar la bombilla                                          |
+| [cronget](./utils/help/md/help-cronget.md)   | Recupera el valor del timer actual                                                |
+| [crondel](./utils/help/md/help-crondel.md)   | Elimina el timer actual                                                          |
 | [adjust](./utils/help/md/help-adjust.md)    | Ajusta brillo, temperatura o color sin saber el valor actual                     |
 | name      | Cambia el nombre local de la bombilla                                            |
 | help      | Muestra la ayuda del programa                                                    |

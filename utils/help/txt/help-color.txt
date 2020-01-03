@@ -5,7 +5,7 @@ SINTAXIS
     npm run yeelight <color> {red | green | blue | white | orange | yellow}
 
 DESCRIPCION
-    Cambiar el color de la luz a uno de los predefinidos en la siguiente lista:
+    Cambia el color de la luz a uno de los predefinidos en la siguiente lista:
         - red
         - green
         - blue  
