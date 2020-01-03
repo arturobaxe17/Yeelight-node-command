@@ -4,8 +4,8 @@ Aplicación creada en node.js para controlar mediante linea de comando bombillas
 
  ## ¿Cómo se utiliza?
 
- En primer lugar, se debe activar la opción de <a href="https://www.yeelight.com/faqs/lan_control" target="_blank">LAN Control</a>.
- 
+ En primer lugar, se debe activar la opción de [LAN Control](https://www.yeelight.com/faqs/lan_control).
+
 Los pasos a seguir son los siguientes:
 1. Obtener la dirección IP de la bombilla que se quiere controlar.
 2. En el fichero [client.js](./src/client.js) sustituir el valor `XXX.XXX.X.XXX` con la dirección IP de la bombilla:
@@ -43,3 +43,9 @@ La lista de comandos implementados se resume en la siguiente tabla:
 | crondel   | Elimina el timer actual                                                          |
 | adjust    | Ajusta brillo, temperatura o color sin saber el valor actual                     |
 | name      | Cambia el nombre local de la bombilla                                            |
+| help      | Muestra la ayuda del programa                                                    |
+
+### [on](./utils/help/help-on.txt)
+
+
+
