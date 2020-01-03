@@ -8,7 +8,11 @@ COMMANDS
                 Parametros: R = [0 - 255] G = [0 - 255] B = [0 - 255]
                             Efecto = {sudden | smooth}
                             Duracion (segundos)
-    get       - Solicita los parametros a la bombilla
+    hsv       - Cambia a un color en formato HSV 
+                Parametros: Hue = [0 - 359]
+                            Saturation = [0 - 100]
+                            Efecto = {sudden | smooth}
+                            Duracion [0 - 1440] (segundos)
     bright    - Cambia el valor del brillo
                 Parametros: Brillo = [0 - 100]
                             Efecto = {sudden | smooth}
@@ -17,11 +21,7 @@ COMMANDS
                 Parametros: Temperatura = [1700 (Rojo) - 6500 (Azul)]
                             Efecto = {sudden | smooth}
                             Duracion (segundos)
-    hsv       - Cambia a un color en formato HSV 
-                Parametros: Hue = [0 - 359]
-                            Saturation = [0 - 100]
-                            Efecto = {sudden | smooth}
-                            Duracion [0 - 1440] (segundos)
+    get       - Solicita los parametros a la bombilla
     startflow - Inicia el modo color flow
     stopflow  - Detiene el modo de color flow
     cronadd   - Inicia timer para apagar la bombilla

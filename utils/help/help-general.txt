@@ -5,4 +5,4 @@ El formato de los comandos a ejecutar es el siguiente:
    - npm start <command> [params]
 
 Para ver la lista de comandos permitidos utilizar el comando: 
-     "npm run yeelight help commands
+   - npm run yeelight help commands
