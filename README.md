@@ -41,11 +41,11 @@ La lista de comandos implementados se resume en la siguiente tabla:
 | cronadd   | Inicia un timer para apagar la bombilla                                          |
 | cronget   | Recuper el valor del timer actual                                                |
 | crondel   | Elimina el timer actual                                                          |
-| adjust    | Ajusta brillo, temperatura o color sin saber el valor actual                     |
+| [adjust](./utils/help/help-adjust.md)    | Ajusta brillo, temperatura o color sin saber el valor actual                     |
 | name      | Cambia el nombre local de la bombilla                                            |
 | help      | Muestra la ayuda del programa                                                    |
 
-### [on](./utils/help/help-on.txt)
+### [adjust](./utils/help/help-on.txt)
 
 
 
