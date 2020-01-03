@@ -21,8 +21,8 @@ Permite cambiar el brillo, CT o el color de la bombilla si saber el valor actual
     - bright: ajusta el brillo
     - ct:     ajusta la temperatura del color
     - color:  ajusta el color (para esta propiedad solo se permite la acción 'circle')
- 
-    
+
+
 ###  EJEMPLO COMANDO
 Incrementar el brillo:
 ```shell
@@ -30,7 +30,7 @@ npm run yeelight adjust increase bright
 ```
 
 ###  EJEMPLO PETICION ENVIADA
-```javascript
+```JSON
 { 
     id: 0, 
     method: 'set_adjust', 
