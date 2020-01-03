@@ -1,6 +1,6 @@
 const fs = require('fs');
 exports.printHelp = function (section) {
-    const helpPath = './utils/help/help-';
+    const helpPath = './utils/help/txt/help-';
     const extension = '.txt'
 
     if (section == null) {

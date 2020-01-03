@@ -13,14 +13,14 @@ Permite cambiar el brillo, CT o el color de la bombilla si saber el valor actual
 
 ###  PARAMETROS
 1. Acción:
-    - increase: incrementa la propiedad especificada
-    - decrease: decrementa la propiedad especificada
-    - circle:   incrementa la propiedad especificada, después de llegar al valor máximo, vuelve al valor mínimo.
+    - `increase`: incrementa la propiedad especificada
+    - `decrease`: decrementa la propiedad especificada
+    - `circle`:   incrementa la propiedad especificada, después de llegar al valor máximo, vuelve al valor mínimo.
     
 2. Propiedad:
-    - bright: ajusta el brillo
-    - ct:     ajusta la temperatura del color
-    - color:  ajusta el color (para esta propiedad solo se permite la acción 'circle')
+    - `bright`: ajusta el brillo
+    - `ct`:     ajusta la temperatura del color
+    - `color`:  ajusta el color (para esta propiedad solo se permite la acción 'circle')
 
 
 ###  EJEMPLO COMANDO
@@ -30,7 +30,7 @@ npm run yeelight adjust increase bright
 ```
 
 ###  EJEMPLO PETICION ENVIADA
-```JSON
+```javascript
 { 
     id: 0, 
     method: 'set_adjust', 

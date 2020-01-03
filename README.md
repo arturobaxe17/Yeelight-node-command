@@ -33,7 +33,7 @@ La lista de comandos implementados se resume en la siguiente tabla:
 | color     | Cambia el color de la bombilla a un color concreto mediante el literal del color |
 | rgb       | Cambia el color de la bombilla a un color concreto mediante los valores de RGB   |
 | hsv       | Cambia el color de la bombilla a un color concreto mediante los valores de HSV   |
-| bright    | Cambia el valor del brillo de la bombilla                                        |
+| [bright](./utils/help/md/help-bright.md)    | Cambia el valor del brillo de la bombilla                                        |
 | temp      | Cambia el valor de la temperatura de la luz de la bombilla                       |
 | get       | Solicita los valores de las propiedades de la bombilla                           |
 | startflow | Inicia el modo de color flow                                                     |
@@ -41,11 +41,6 @@ La lista de comandos implementados se resume en la siguiente tabla:
 | cronadd   | Inicia un timer para apagar la bombilla                                          |
 | cronget   | Recuper el valor del timer actual                                                |
 | crondel   | Elimina el timer actual                                                          |
-| [adjust](./utils/help/help-adjust.md)    | Ajusta brillo, temperatura o color sin saber el valor actual                     |
+| [adjust](./utils/help/md/help-adjust.md)    | Ajusta brillo, temperatura o color sin saber el valor actual                     |
 | name      | Cambia el nombre local de la bombilla                                            |
 | help      | Muestra la ayuda del programa                                                    |
-
-### [adjust](./utils/help/help-on.txt)
-
-
-

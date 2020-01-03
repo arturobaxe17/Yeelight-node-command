@@ -12,7 +12,7 @@ PARAMETROS
     2. Efecto: Tipo de cambio de brillo.
         - sudden: Cambia el color de la luz de inmediato
         - smooth: Cambia el color de la luz con un intervalo definido con el parametro de duración
-    3. Duración: El parámetro de duración solo se tendrá en cuenta con el efecto 'smooth' y el valor introducido estará en segundos.
+    3. Duración: El parámetro de duración solo se tendrá en cuenta con el efecto 'smooth'. El valor introducido estará en segundos.
 
 EJEMPLO COMANDO
     Cambio inmediato de de brillo al 10%:
