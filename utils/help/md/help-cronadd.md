@@ -13,7 +13,7 @@ Inicia un timer tras el cual se apagará la bombilla.
 
 
 ### PARAMETROS
-1. Tiempo: número de minutos tras el cual se debe apagar la bombilla.
+1. **Tiempo**: número de minutos tras el cual se debe apagar la bombilla.
     
 ### EJEMPLO
 Apagar la bombilla después de una hora:

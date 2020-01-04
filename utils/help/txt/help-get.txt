@@ -2,12 +2,17 @@ NOMBRE
     get
 
 SINTAXIS
-    npm run yeelight get
+    npm run yeelight get [propiedad]
 
 DESCRIPCION
-    Solicita los parámetros a la bombilla.
+    Solicita las propiedades a la bombilla. 
 
-    La lista de parámetros solicitados es:
+    Se puede solicitar propiedades concretas, en caso de que no se escriba ninguna propiedad se solcitarán todas.
+
+
+PARAMETROS
+
+    1. Propiedad:
         - power: Estado de la bombilla. on: encendida / off: apagada
         - bright: Porcentaje de brillo. Rango [1 - 100]
         - ct: Temperatura de color. Rango [1700 - 6500] (k)

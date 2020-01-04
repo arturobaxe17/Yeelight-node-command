@@ -11,11 +11,11 @@ npm run yeelight bright [brillo] <{sudden | smooth}> <duration>
 Cambia el valor del brillo de la bombilla. 
 
 ### PARAMETROS    
-1. Brillo: Rango de valores permitido para el brillo `[0 - 100]`
-2. Efecto: Tipo de cambio de brillo.
+1. **Brillo**: Rango de valores permitido para el brillo `[0 - 100]`
+2. **Efecto**: Tipo de cambio de brillo.
     - `sudden`: Cambia el color de la luz de inmediato
     - `smooth`: Cambia el color de la luz con un intervalo definido con el parametro de duración
-3. Duración: El parámetro de duración solo se tendrá en cuenta con el efecto `smooth`. El valor introducido estará en segundos.
+3. **Duración**: El parámetro de duración solo se tendrá en cuenta con el efecto `smooth`. El valor introducido estará en segundos.
 
 
 ### EJEMPLO COMANDO

@@ -20,7 +20,7 @@ Este comando se puede utilizar sin necesidad de escribir `color`, poniendo direc
 
 
 ### PARAMETROS
-1. Color: color al cual se quiere cambiar. Solo se permiten los valores especificados en la lista.
+1. **Color**: color al cual se quiere cambiar. Solo se permiten los valores especificados en la lista.
 
 
 ### EJEMPLO COMANDO

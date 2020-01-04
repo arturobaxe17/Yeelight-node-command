@@ -1,29 +1,20 @@
-# Yeelight-node-command
+### NOMBRE
+    help
 
-Aplicación creada en node.js para controlar mediante linea de comando bombillas **Yeelight**.
 
- ## ¿Cómo se utiliza?
+### SINTAXIS
+```shell
+npm run yeelight help [comando]
+```
 
- En primer lugar, se debe activar la opción de [LAN Control](https://www.yeelight.com/faqs/lan_control).
 
-Los pasos a seguir son los siguientes:
-1. Obtener la dirección IP de la bombilla que se quiere controlar.
-2. En el fichero [client.js](./src/client.js) sustituir el valor `XXX.XXX.X.XXX` con la dirección IP de la bombilla:
-    ```javascript
-    const connection = {
-        port: 55443,
-        host: 'XXX.XXX.X.XXX'
-    }
-    ```
-3. Desde la consola nos situariemos en el directorio dónde se encuentre el programa.
-4. Ejecutar el comando que se quiere ejecutar. El formato del comando es:
-    ```shell
-    npm run yeelight <command> [params]
-    ```
+### DESCRIPCION
+Muestra la ayuda del programa. Se puede mostrar ayuda general o ayuda por comando.
 
-## Comandos implementados
 
-La lista de comandos implementados se resume en la siguiente tabla:
+### PARAMETROS
+1. **Comando**: nombre del comando del que se quiere obtener ayuda. Opcional. La lista de comandos para los que se puede solicitar ayuda se lista en la siguiente tabla:
+
 
 | Comando   | Descripción                                                                                                           |
 |-----------|-----------------------------------------------------------------------------------------------------------------------|
@@ -44,3 +35,4 @@ La lista de comandos implementados se resume en la siguiente tabla:
 | [adjust](./utils/help/md/help-adjust.md)       | Ajusta brillo, temperatura o color sin saber el valor actual                     |
 | [name](./utils/help/md/help-name.md)           | Cambia el nombre local de la bombilla                                            |
 | [help](./utils/help/md/help-help.md)           | Muestra la ayuda del programa                                                    |
+
