@@ -46,5 +46,6 @@ npm run yeelight orange
     id: 0, 
     result: [ 'ok' ] 
 }
+```
     
     

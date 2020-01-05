@@ -32,7 +32,7 @@ Se puede solicitar propiedades concretas, en caso de que no se escriba ninguna p
         - `0`: flow no está ejecutándose 
         - `1`: flow ejecutándose
     - `delayoff`: Tiempo restante del timer. Rangp `[1 - 60]` (minutos)
-    - `flow_params`: Parámetros de flujo actuales (solo con datos cuando 'flowing' es 1)
+    - `flow_params`: Parámetros de flujo actuales (solo con datos cuando `flowing` es 1)
     - `music_on`: 
         - `0`: Modo música está desactivado 
         - `1`: Modo música está activado
@@ -57,15 +57,15 @@ npm run yeelight get name power
 { 
     id: 0, 
     method: 'get_prop', 
-    params: [ 'name' ] 
+    params: [ 'name', 'power' ] 
 }
 ```
 
 
 ### EJEMPLO RESPUESTA
 ```javascript
-{
+{ 
     id: 0, 
-    result: [ 'bombilla-escritorio' ] 
+    result: [ 'bombilla-escritorio', 'on' ] 
 }
 ```

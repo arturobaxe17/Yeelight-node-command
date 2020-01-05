@@ -34,7 +34,7 @@ EJEMPLO
         - npm run yeelight get name power
 
 EJEMPLO PETICION ENVIADA
-    { id: 0, method: 'get_prop', params: [ 'name' ] }
+    { id: 0, method: 'get_prop', params: [ 'name', 'power' ] }
 
 EJEMPLO RESPUESTA
-    { id: 0, result: [ 'bombilla-escritorio' ] }
+    { id: 0, result: [ 'bombilla-escritorio', 'on' ] }

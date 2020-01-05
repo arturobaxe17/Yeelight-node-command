@@ -26,7 +26,7 @@ npm run yeelight bright 10 sudden
 ``` 
 Cambio de brillo al 20% con un intervalo de 5 segundos:
 ```shell
-npm run yeelight bright smooth 5
+npm run yeelight bright 20 smooth 5
 ```
 
 ### EJEMPLO PETICION ENVIADA

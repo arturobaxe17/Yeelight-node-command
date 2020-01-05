@@ -44,3 +44,9 @@ La lista de comandos implementados se resume en la siguiente tabla:
 | [adjust](./utils/help/md/help-adjust.md)       | Ajusta brillo, temperatura o color sin saber el valor actual                     |
 | [name](./utils/help/md/help-name.md)           | Cambia el nombre local de la bombilla                                            |
 | [help](./utils/help/md/help-help.md)           | Muestra la ayuda del programa                                                    |
+
+## Pendiente implementar
+
+- [ ] Permitir introducir los valores para el modo color flow.
+- [ ] Implementar el comando de `set_scene`.
+- [ ] Matchear los parámetros solicitados en la función `get`con los valores devueltos por la bombilla.

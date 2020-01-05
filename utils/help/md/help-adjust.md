@@ -22,12 +22,21 @@ Permite cambiar el brillo, CT o el color de la bombilla si saber el valor actual
     - `ct`:     ajusta la temperatura del color
     - `color`:  ajusta el color (para esta propiedad solo se permite la acción 'circle')
 
+3. **Porcentaje**: opcional. Rango `[0 - 100]`
+
+4. **Duración**: opcional, solo es obligatoria si hay porcentaje. Valor en segundos.
 
 ###  EJEMPLO COMANDO
 Incrementar el brillo:
 ```shell
 npm run yeelight adjust increase bright
 ```
+
+Decrementar el brillo un 10 en 5 segundos:
+```shell
+npm run yeelight adjust decrease bright 10 5
+```
+
 
 ###  EJEMPLO PETICION ENVIADA
 ```javascript

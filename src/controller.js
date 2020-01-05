@@ -70,7 +70,7 @@ function createNewCommand(id, func, params) {
     let command = new Object();
     command.id = id;
     command.method = methodDictionary[func];
-    command.params = parseParams(func, params);
+    command.params = parseParams(func, params, command);
     return command;
 }
 
@@ -80,7 +80,7 @@ function inputToArray() {
     return args;
 }
 
-function parseParams(func, values) {
+function parseParams(func, values, object) {
     switch (func) {
         case 'on':
             params = ["on"];
@@ -133,7 +133,10 @@ function parseParams(func, values) {
             params.push(0); //Apagar la bombilla, valor fijo
             break;
         case 'adjust':
-            adjustParams(values);
+            let command = adjustParams(values);
+            if (command) {
+                object.method = command;
+            }
             break;
         case 'name':
             let name = getName(values);
@@ -216,20 +219,26 @@ function brightParams(values) {
     }
 }
 
-function adjustParams(values){
+function adjustParams(values) {
     let action = getAction(values);
     let prop = getProperties(values);
-    params.push(action);
-    params.push(prop);
-    //TODO
     let percentage = values[2];
     let duration = values[3];
 
-    if(percentage){
-        percentage = validateRange(percentage, -100, 100);
-    }
-    if(duration){
-        duration = duration * 1000;
+    if (percentage) {
+        percentage = validateRange(percentage, 0, 100);
+        if (action == 'decrease') {
+            percentage *= -1;
+        }
+        params.push(percentage);
+        if (duration) {
+            duration = duration * 1000;
+            params.push(duration);
+        }
+        return 'adjust_' + prop;
+    } else {
+        params.push(action);
+        params.push(prop);
     }
 }
 
