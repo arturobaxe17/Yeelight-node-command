@@ -49,4 +49,5 @@ La lista de comandos implementados se resume en la siguiente tabla:
 
 - [ ] Permitir introducir los valores para el modo color flow.
 - [ ] Implementar el comando de `set_scene`.
-- [ ] Matchear los parámetros solicitados en la función `get`con los valores devueltos por la bombilla.
+- [ ] Matchear los parámetros solicitados en la función `get` con los valores devueltos por la bombilla.
+- [ ] Fichero de configuración.
