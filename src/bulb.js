@@ -52,10 +52,10 @@ class LightBulb extends EventEmitter {
     }
 
     sendRequest(request) {
-       if (!this.connected) {
-           this.connect();
-       }
-       console.log(JSON.parse(request));
+        if (!this.connected) {
+            this.connect();
+        }
+        console.log(JSON.parse(request));
         this.socket.write(request);
     }
 }
