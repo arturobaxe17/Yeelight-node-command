@@ -10,10 +10,7 @@ Los pasos a seguir son los siguientes:
 1. Obtener la dirección IP de la bombilla que se quiere controlar.
 2. En el fichero [client.js](./src/client.js) sustituir el valor `XXX.XXX.X.XXX` con la dirección IP de la bombilla:
     ```javascript
-    const connection = {
-        port: 55443,
-        host: 'XXX.XXX.X.XXX'
-    }
+        let host = 'XXX.XXX.X.XXX';
     ```
 3. Desde la consola nos situariemos en el directorio dónde se encuentre el programa.
 4. Ejecutar el comando que se quiere ejecutar. El formato del comando es:

@@ -1,33 +1,46 @@
-const net = require('net');
+const client = require('./bulb.js');
+const controller = require('./controller.js');
+const newLine = '\r\n';
+let host = '192.168.0.100';
 
-const connection = {
-    port: 55443,
-    host: '192.168.0.101'
+const bulb = new client(host);
+
+request = controller.inputToCommand();
+
+bulb.connect();
+
+if (request) {
+    createRequest(request.id, request.method, request.params);
 }
 
-var socket = net.connect(connection.port, connection.host, function () {
-    let address = socket.address();
-   // console.log("Connected to " + host + ":" + port);
-})
+bulb.on('connected', () => {
+    //console.log("Cliente conectado"); 
+});
 
-socket.on('error', function (err) {
-    console.log("Error");
-    console.log(err);
-})
+bulb.on('datos', () => {
+    //console.log("Cliente data"); 
+});
 
-socket.on('data', function (data) {
-    let message = data.toString();
-    //let printMessage =  JSON.stringify(JSON.parse(message),null,3);
-    let printMessage =  JSON.parse(message);
-    console.log("\r\nData: ");
-    console.log(printMessage);
-    socket.end();
-})
+bulb.on('disconnected', () => {
+    //console.log('Cliente desconectado');
+});
 
-exports.sendRequest = function(request){
-    //let printRequest = JSON.stringify(JSON.parse(request),null,3);
-    let printRequest = JSON.parse(request);
-    
-    console.log(printRequest);
-    socket.write(request);
+function createRequest(id, method, params) {
+    let request = new Object();
+
+    request.id = id;
+    request.method = method;
+    request.params = [];
+
+    for (let param in params) {
+        request.params.push(params[param]);
+    }
+
+    var jsonRequest = JSON.stringify(request) + newLine;
+    bulb.sendRequest(jsonRequest);
 }
+
+setTimeout(function () {
+    bulb.disconnect();
+}, 300);
+
