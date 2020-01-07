@@ -4,10 +4,10 @@ const EventEmitter = require('events');
 class LightBulb extends EventEmitter {
     constructor(host) {
         super();
-        this.connected = false;
         this.socket = null;
         this.port = 55443;
         this.host = host;
+        this.connected = false;
     }
 
     connect() {
@@ -20,9 +20,7 @@ class LightBulb extends EventEmitter {
         this.socket.on('data', (data) => {
             let message = data.toString();
             let printMessage = JSON.parse(message);
-            console.log("\r\nData: ");
-            console.log(printMessage);
-            this.emit('data');
+            this.emit('data', printMessage);
         });
 
         this.socket.on('end', () => {
@@ -30,12 +28,12 @@ class LightBulb extends EventEmitter {
         });
 
         this.socket.connect(this.port, this.host, () => {
-            this.emit('connected');
+            this.connected = true;
+            this.emit('connected', this.host, this.port);
         });
 
         this.socket.on('close', () => {
-            this.disconnect();
-        });
+        })
 
         this.socket.on('error', (err) => {
             console.log("Error");
@@ -45,7 +43,7 @@ class LightBulb extends EventEmitter {
     }
 
     disconnect() {
-        this.connnected = false;
+        this.connected = false;
         if (this.socket) {
             this.socket.destroy();
         }
@@ -54,10 +52,11 @@ class LightBulb extends EventEmitter {
     }
 
     sendRequest(request) {
-        let printRequest = JSON.parse(request);
-        console.log(printRequest);
+       if (!this.connected) {
+           this.connect();
+       }
+       console.log(JSON.parse(request));
         this.socket.write(request);
-        this.emit('data');
     }
 }
 

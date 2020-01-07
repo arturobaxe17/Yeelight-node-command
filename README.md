@@ -17,6 +17,25 @@ Los pasos a seguir son los siguientes:
     ```shell
     npm run yeelight <command> [params]
     ```
+5. Una vez introducido el comando se mostrarán los siguientes mensajes:
+    1. Mensaje a enviar a la bombilla en formato JSON:
+        ```javascript
+        { id: 0, method: 'set_rgb', params: [ 16744192 ] }
+        ```
+    2. Mensaje de conexión a la bombilla, indicando IP y puerto:
+        ```
+        Yeelight conectada: 192.168.0.100:55443
+        ```
+    3. Mensaje recibido de la bombilla en formato JSON:
+        ```javascript
+        { id: 0, result: [ 'ok' ] }
+        ```
+    4. Mensaje de desconexión de la bombilla:
+        ```
+        Yeelight desconectada
+        ```
+
+Se debe tener en cuenta que después de 1 segundo se desconecta la bombilla y se finaliza la conexión.
 
 ## Comandos implementados
 
