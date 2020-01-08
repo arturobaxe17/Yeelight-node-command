@@ -2,10 +2,16 @@ const Bulb = require('./bulb.js');
 const Parser = require('./parser.js');
 const Help = require('./help.js');
 const config = require('../utils/config/config.json');
-const defaultHost = '192.168.0.101'
-
+const defaultHost = '192.168.0.101';
 const newLine = '\r\n';
-const host = config.host || defaultHost;
+let reqParams = {};
+let getting = false;
+
+let configuration = {
+    consoling: config.config || false,
+    host: config.host || defaultHost
+}
+
 const completions = ['on', 'off', 'setpower',
     'toggle', 'color', 'rgb',
     'red', 'green', 'blue', 'white',
@@ -20,10 +26,6 @@ const cmdCtrl = require('readline').Interface({
     prompt: 'Yeelight>',
     completer
 });
-
-let consoling = config.consoling || false;
-let reqParams = {};
-let getting = false;
 
 function completer(line) {
     var hits = completions.filter(function (c) {
@@ -45,17 +47,17 @@ cmdCtrl.on('line', (line) => {
     process.exit(0);
 });
 
-const bulb = new Bulb(host);
+const bulb = new Bulb(configuration.host);
 
 bulb.on('connected', (host, port) => {
-    // if (consoling) {
+    // if () {
     //     console.log(`Yeelight conectada: ${host}:${port}`);
     // }
 });
 
 bulb.on('request', (request) => {
     let jRequest = JSON.parse(request);
-    if (consoling) {
+    if (configuration.consoling) {
         cmdCtrl.prompt();
 
         console.log('\x1b[32m%s%s\x1b[0m', 'Cliente  => ', request.replace(/\s+/g, " "));
@@ -66,7 +68,7 @@ bulb.on('request', (request) => {
 })
 
 bulb.on('data', (message) => {
-    if (consoling) {
+    if (configuration.consoling) {
         console.log('\x1b[36m%s%s\x1b[0m', 'Bombilla => ', JSON.stringify(message));
     } else if (message.result && !getting) {
         console.log('\x1b[36m%s%s\x1b[0m', 'Bombilla => ', message.result.toString());
@@ -99,13 +101,15 @@ function parseLine(line) {
         cmdCtrl.clearLine(process.stdout, 0);
     } else if (input[0] == 'help') {
         Help.printHelp(input[1]);
+    } else if (input[0] == 'options') {
+        console.log(configuration);
     } else if (input[0] == 'consoling') {
         if (input[1] == null) {
-            consoling = !consoling;
+            configuration.consoling = !configuration.consoling;
         } else if (input[1] == 'on') {
-            consoling = true;
+            configuration.consoling = true;
         } else if (input[1] == 'off') {
-            consoling = false;
+            configuration.consoling = false;
         }
     } else if (input[0] == 'close') {
         bulb.disconnect();

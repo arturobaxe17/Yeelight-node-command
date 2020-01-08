@@ -33,3 +33,8 @@ COMMANDS
                             Propiedad = {bright | ct | color}
     name      - Cambia el nombre local de la bombilla
                 Parametros: Nombre
+    cls       - Limpia la información que haya en la consola
+    consoling - Alterna entre mostrar o no la información enviada y recibida a la bombilla
+                Parametros: [{on | off}]
+    options   - Muestra los parámetros de configuración
+    close     - Finaliza la conexión con la bombilla y cierra el programa

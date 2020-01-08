@@ -2,12 +2,15 @@
 
 Aplicación creada en node.js para controlar mediante linea de comando bombillas **Yeelight**.
 
+La documentación respecto a la comunicación con la bombilla se puede encontrar [aquí](https://www.yeelight.com/download/Yeelight_Inter-Operation_Spec.pdf).
+
  ## ¿Cómo se utiliza?
 
-En primer lugar, se debe activar la opción de [LAN Control](https://www.yeelight.com/faqs/lan_control).
+En primer lugar, se debe activar la opción de [LAN Control](https://www.yeelight.com/faqs/lan_control) de la bombilla que se quiere controlar.
 
 Los pasos a seguir son los siguientes:
 1. Obtener la dirección IP de la bombilla que se quiere controlar.
+
 2. En el fichero [config.json](./utils/config/config.json) sustituir el valor `XXX.XXX.X.XXX` con la dirección IP de la bombilla:
     ```javascript
     {
@@ -27,10 +30,12 @@ Los pasos a seguir son los siguientes:
     ```shell
     Yeelight><comando> [parametros]
     ```
+
 6. Una vez introducido el comando se mostrará la respuesta de la bombilla
     ```shell
     Yeelight>Bombilla => 'respuesta'
     ```
+7. Para finalizar el programa se puede introducir el comando `close` o bien pulsar la combinación de teclas `ctrl+C`.
 
 ## Comandos implementados
 
@@ -57,6 +62,7 @@ La lista de comandos implementados se resume en la siguiente tabla:
 | [help](./utils/help/md/help-help.md)           | Muestra la ayuda del programa                                                    |
 | [cls](./utils/help/md/help-cls.md)             | Limpia el contenido de la pantalla                                               |
 | [consoling](./utils/help/md/help-consoling.md) | Controla la habilitación de los mensajes a mostrar en la linea de comandos       |
+| [options](./utils/help/md/help-options.md)     | Muestra los parámetros de configuración                                          |
 | [close](./utils/help/md/help-close.md)         | Finaliza la conexión con la bombilla y cierra el programa                        |
 
 ## Pendiente implementar
