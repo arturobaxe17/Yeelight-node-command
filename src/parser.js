@@ -1,11 +1,9 @@
-const help = require('./help.js');
-
 const methodDictionary = {
     'on': 'set_power',
     'off': 'set_power',
+    'setpower': 'set_power',
     'toggle': 'toggle',
     'color': 'set_rgb',
-    'colour': 'set_rgb',
     'rgb': 'set_rgb',
     'red': 'set_rgb',
     'green': 'set_rgb',
@@ -42,9 +40,9 @@ const allParams = ["power",
 
 let params = [];
 
-exports.inputToCommand = function () {
+exports.inputToCommand = function (input) {
     let id = 0;
-    let args = inputToArray();
+    let args = inputToArray(input);
     let func = args[0];
     let params = [];
 
@@ -52,17 +50,11 @@ exports.inputToCommand = function () {
         params.push(args[i]);
     }
 
-    if (func == 'help') {
-        help.printHelp(params[0]);
-        process.exit(0);
+    let command = createNewCommand(id, func, params);
+    if (command.method) {
+        return command;
     } else {
-        let command = createNewCommand(id, func, params);
-        if (command.method) {
-            return command;
-        } else {
-            console.log("Entrada incorrecta: " + func);
-            process.exit(0);
-        }
+        console.log("Entrada incorrecta: " + func);
     }
 }
 
@@ -74,13 +66,16 @@ function createNewCommand(id, func, params) {
     return command;
 }
 
-function inputToArray() {
-    let inArgs = process.argv.slice(2).toString();
+function inputToArray(input) {
+    //let inArgs = process.argv.slice(2).toString();
+    let inArgs = input.toString();
     let args = inArgs.split(',');
     return args;
 }
 
 function parseParams(func, values, object) {
+    params.length = 0;
+
     switch (func) {
         case 'on':
             params = ["on"];
@@ -88,12 +83,14 @@ function parseParams(func, values, object) {
         case 'off':
             params = ["off"];
             break;
+        case 'setpower':
+            params = [values[0]];
+            break;
         case 'toggle':
         case 'stopflow':
             params = [];
             break;
         case 'color':
-        case 'colour':
             params = getColor(values);
             break;
         case 'red':

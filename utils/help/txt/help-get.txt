@@ -2,7 +2,7 @@ NOMBRE
     get
 
 SINTAXIS
-    npm run yeelight get [propiedad]
+    Yeelight>get [propiedad/es]
 
 DESCRIPCION
     Solicita las propiedades a la bombilla. 
@@ -28,10 +28,10 @@ PARAMETROS
 
 EJEMPLO
     Solicitud de todos los parametros:
-        - npm run yeelight get
+        - Yeelight>get
     
     Solicitud de nombre y estado de la bombilla:
-        - npm run yeelight get name power
+        -Yeelight>get name power
 
 EJEMPLO PETICION ENVIADA
     { id: 0, method: 'get_prop', params: [ 'name', 'power' ] }

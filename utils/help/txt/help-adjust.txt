@@ -2,7 +2,7 @@ NOMBRE
     adjust
 
 SINTAXIS
-    npm run yeelight adjust {increase | decrease | circle} {bright | ct | color} [porcentaje] [duracion]
+    Yeelight>adjust {increase | decrease | circle} {bright | ct | color} [porcentaje] [duracion]
 
 DESCRIPCION
     Permite cambiar el brillo, CT o el color de la bombilla si saber el valor actual.
@@ -24,7 +24,7 @@ PARAMETROS
     
 EJEMPLO COMANDO
     Incrementar el brillo:
-        - npm run yeelight adjust increase bright
+        - Yeelight>adjust increase bright
 
 EJEMPLO PETICION ENVIADA
     { id: 0, method: 'set_adjust', params: [ 'increase', 'bright' ] }

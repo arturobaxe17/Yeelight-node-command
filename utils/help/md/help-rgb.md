@@ -3,7 +3,7 @@
 
 ### SINTAXIS
 ```shell
-npm run yeelight rgb [red value] [green value] [blue value] <{sudden | smooth}> <duration>
+Yeelight>rgb [red value] [green value] [blue value] <{sudden | smooth}> <duration>
 ```
 
 ### DESCRIPCION
@@ -25,13 +25,13 @@ Cambia el color de la luz en función del valor RGB introducido.
 ### EJEMPLO
 Cambio inmediato de color a azul:
 ```shell
-npm run yeelight rgb 0 0 255 
-npm run yeelight rgb 0 0 255 sudden
+Yeelight>rgb 0 0 255 
+Yeelight>rgb 0 0 255 sudden
 ```
     
 Cambio de color a azul con un intervalo de 2 segundos:
 ```shell
-npm run yeelight rgb 0 0 255 smooth 2
+Yeelight>rgb 0 0 255 smooth 2
 ```
 
 ### EJEMPLO PETICION ENVIADA

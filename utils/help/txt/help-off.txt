@@ -2,7 +2,7 @@ NOMBRE
     off
 
 SINTAXIS
-    npm run yeelight off
+    Yeelight>off
 
 DESCRIPCION
     Apaga la bombilla

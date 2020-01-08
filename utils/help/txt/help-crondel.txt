@@ -2,7 +2,7 @@ NOMBRE
     crondel
 
 SINTAXIS
-    npm run yeelight crondel
+    Yeelight>crondel
 
 DESCRIPCION
     Elimina el timer actual.

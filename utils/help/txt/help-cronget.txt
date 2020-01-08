@@ -2,7 +2,7 @@ NOMBRE
     cronget
 
 SINTAXIS
-    npm run yeelight cronget
+    Yeelight>cronget
 
 DESCRIPCION
     Recupera el valor en minutos del timer actual.

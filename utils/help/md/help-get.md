@@ -4,7 +4,7 @@
 
 ### SINTAXIS
 ```shell
-npm run yeelight get [propiedad]
+Yeelight>get [propiedad]
 ```
 
 
@@ -42,13 +42,13 @@ Se puede solicitar propiedades concretas, en caso de que no se escriba ninguna p
 ### EJEMPLO
 Solicitud de todos los parametros:
 ```shell
-npm run yeelight get
+Yeelight>get
 ```
 
 
 Solicitud de nombre y estado de la bombilla:
 ```shell
-npm run yeelight get name power
+Yeelight>get name power
 ```
 
 

@@ -4,7 +4,7 @@
 
 ### SINTAXIS
 ```shell    
-npm run yeelight bright [brillo] <{sudden | smooth}> <duration>
+Yeelight>bright [brillo] <{sudden | smooth}> <duration>
 ```
 
 ### DESCRIPCION
@@ -21,12 +21,12 @@ Cambia el valor del brillo de la bombilla.
 ### EJEMPLO COMANDO
 Cambio inmediato de de brillo al 10%:
 ```shell
-npm run yeelight bright 10
-npm run yeelight bright 10 sudden
+Yeelight>bright 10
+Yeelight>bright 10 sudden
 ``` 
 Cambio de brillo al 20% con un intervalo de 5 segundos:
 ```shell
-npm run yeelight bright 20 smooth 5
+Yeelight>bright 20 smooth 5
 ```
 
 ### EJEMPLO PETICION ENVIADA

@@ -3,7 +3,7 @@
 
 ### SINTAXIS
 ```shell    
-npm run yeelight name [nombre]
+Yeelight>name [nombre]
 ```
 
 ### DESCRIPCION
@@ -16,7 +16,7 @@ Cambia el nombre local de la bombilla.
 ### EJEMPLO COMANDO
 Cambia el nombre de la bombila a 'bombilla-escritorio':
 ```shell
-npm run yeelight name bombilla-escritorio
+Yeelight>name bombilla-escritorio
 ```
 
 ### EJEMPLO PETICION ENVIADA

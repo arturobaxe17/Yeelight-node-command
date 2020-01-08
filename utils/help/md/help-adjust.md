@@ -4,7 +4,7 @@
 
 ### SINTAXIS
 ```shell
-npm run yeelight adjust {increase | decrease | circle} {bright | ct | color}
+Yeelight>adjust {increase | decrease | circle} {bright | ct | color}
 ```
 
 ###  DESCRIPCION
@@ -29,12 +29,12 @@ Permite cambiar el brillo, CT o el color de la bombilla si saber el valor actual
 ###  EJEMPLO COMANDO
 Incrementar el brillo:
 ```shell
-npm run yeelight adjust increase bright
+Yeelight>adjust increase bright
 ```
 
 Decrementar el brillo un 10 en 5 segundos:
 ```shell
-npm run yeelight adjust decrease bright 10 5
+Yeelight>adjust decrease bright 10 5
 ```
 
 

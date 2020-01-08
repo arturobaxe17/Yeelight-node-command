@@ -4,7 +4,7 @@
 
 ### SINTAXIS
 ```shell
-npm run yeelight stopflow
+Yeelight>stopflow
 ```
 
 

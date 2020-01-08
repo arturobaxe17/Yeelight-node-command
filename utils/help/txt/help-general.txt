@@ -1,8 +1,7 @@
 Programa de linea de comandos para controlar bombilla Yeelight.
 
 El formato de los comandos a ejecutar es el siguiente: 
-   - npm run yeelight <command> [params]
-   - npm start <command> [params]
+   - Yeelight><comando> [parametros]
 
 Para ver la lista de comandos implementados utilizar el comando: 
-   - npm run yeelight help commands
+   - Yeelight>help commands

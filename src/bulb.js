@@ -6,7 +6,7 @@ class LightBulb extends EventEmitter {
         super();
         this.socket = null;
         this.port = 55443;
-        this.host = host;
+        this.host = host || defaultHost;
         this.connected = false;
     }
 
@@ -36,7 +36,7 @@ class LightBulb extends EventEmitter {
         })
 
         this.socket.on('error', (err) => {
-            console.log("Error");
+            console.log('Error');
             console.log(err);
             this.disconnect();
         });
@@ -55,7 +55,7 @@ class LightBulb extends EventEmitter {
         if (!this.connected) {
             this.connect();
         }
-        console.log(JSON.parse(request));
+        this.emit('request', request);
         this.socket.write(request);
     }
 }

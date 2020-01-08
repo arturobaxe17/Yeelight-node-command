@@ -3,11 +3,13 @@
     
 
 ### SINTAXIS
-    npm run yeelight cronget
+```shell
+Yeelight>cronget
+```
 
 
 ### DESCRIPCION
-    Recupera el valor en minutos del timer actual.
+Recupera el valor en minutos del timer actual.
 
 
 ### EJEMPLO PETICION ENVIADA

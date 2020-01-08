@@ -4,7 +4,7 @@
 
 ### SINTAXIS
 ```shell
-npm run yeelight <color> {red | green | blue | white | orange | yellow}
+Yeelight><color> {red | green | blue | white | orange | yellow}
 ```
 
 ### DESCRIPCION
@@ -26,8 +26,8 @@ Este comando se puede utilizar sin necesidad de escribir `color`, poniendo direc
 ### EJEMPLO COMANDO
 Cambio de color a naranja:
 ```shell
-npm run yeelight color orange
-npm run yeelight orange
+Yeelight>color orange
+Yeelight>orange
 ```
 
 ### EJEMPLO PETICION ENVIADA

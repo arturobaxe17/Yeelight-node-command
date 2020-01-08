@@ -4,7 +4,7 @@
 
 ### SINTAXIS
 ```shell
-npm run yeelight help [comando]
+Yeelight>help [comando]
 ```
 
 

@@ -4,7 +4,7 @@
 
 ### SINTAXIS
 ```shell
-npm run yeelight cronadd [tiempo]
+Yeelight>cronadd [tiempo]
 ```
 
 
@@ -18,7 +18,7 @@ Inicia un timer tras el cual se apagará la bombilla.
 ### EJEMPLO
 Apagar la bombilla después de una hora:
 ```shell
-npm run yeelight cronadd 60
+Yeelight>cronadd 60
 ```
 
 ### EJEMPLO PETICION ENVIADA

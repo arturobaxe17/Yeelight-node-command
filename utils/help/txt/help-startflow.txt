@@ -2,7 +2,7 @@ NOMBRE
     startflow
 
 SINTAXIS
-    npm run yeelight startflow
+    Yeelight>startflow
 
 DESCRIPCION
     Inicia el modo color flow

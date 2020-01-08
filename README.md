@@ -13,11 +13,18 @@ Los pasos a seguir son los siguientes:
         let host = 'XXX.XXX.X.XXX';
     ```
 3. Desde la consola nos situariemos en el directorio dónde se encuentre el programa.
-4. Ejecutar el comando que se quiere ejecutar. El formato del comando es:
+
+4. Ejecutar uno de los siguientes comandos:
     ```shell
-    npm run yeelight <command> [params]
+    prompt>npm start
+    prompt>npm run yeelight
     ```
-5. Una vez introducido el comando se mostrarán los siguientes mensajes:
+
+5. Aparecerá el nuevo prompt: `Yeelight>`. Aquí introduciremos el comando que se quiere ejecutar. El formato del comando es:
+    ```shell
+    Yeelight><comando> [parametros]
+    ```
+6. Una vez introducido el comando se mostrarán los siguientes mensajes:
     1. Mensaje a enviar a la bombilla en formato JSON:
         ```javascript
         { id: 0, method: 'set_rgb', params: [ 16744192 ] }
@@ -34,8 +41,6 @@ Los pasos a seguir son los siguientes:
         ```
         Yeelight desconectada
         ```
-
-Se debe tener en cuenta que después de 1 segundo se desconecta la bombilla y se finaliza la conexión.
 
 ## Comandos implementados
 
@@ -60,10 +65,13 @@ La lista de comandos implementados se resume en la siguiente tabla:
 | [adjust](./utils/help/md/help-adjust.md)       | Ajusta brillo, temperatura o color sin saber el valor actual                     |
 | [name](./utils/help/md/help-name.md)           | Cambia el nombre local de la bombilla                                            |
 | [help](./utils/help/md/help-help.md)           | Muestra la ayuda del programa                                                    |
+| [cls](./utils/help/md/help-cls.md)             | Limpia el contenido de la pantalla                                               |
+| [consoling](./utils/help/md/help-consoling.md) | Controla la habilitación de los mensajes a mostrar en la linea de comandos       |
 
 ## Pendiente implementar
 
 - [ ] Permitir introducir los valores para el modo color flow.
 - [ ] Implementar el comando de `set_scene`.
-- [ ] Matchear los parámetros solicitados en la función `get` con los valores devueltos por la bombilla.
+- [X] Matchear los parámetros solicitados en la función `get` con los valores devueltos por la bombilla.
 - [ ] Fichero de configuración.
+- [ ] Documentar las nuevas funciones `cls` y `consoling`.

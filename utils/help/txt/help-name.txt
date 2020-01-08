@@ -2,7 +2,7 @@ NOMBRE
     name
 
 SINTAXIS
-    npm run yeelight name [nombre]
+    Yeelight>name [nombre]
 
 DESCRIPCION
     Cambia el nombre local de la bombilla.
@@ -12,7 +12,7 @@ PARAMETROS
 
 EJEMPLO COMANDO
     Cambia el nombre de la bombila a 'bombilla-escritorio':
-        - npm run yeelight name bombilla-escritorio
+        - Yeelight>name bombilla-escritorio
 
 EJEMPLO PETICION ENVIADA
     { id: 0, method: 'set_name', params: [ 'bombilla-escritorio' ] }

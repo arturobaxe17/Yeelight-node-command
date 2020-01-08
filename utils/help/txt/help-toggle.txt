@@ -2,7 +2,7 @@ NOMBRE
     toggle
 
 SINTAXIS
-    npm run yeelight toggle
+    Yeelight>toggle
 
 DESCRIPCION
     Cambia el estado de bombilla entre apagado y encendido en función de su estado actual

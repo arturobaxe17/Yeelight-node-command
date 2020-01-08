@@ -2,7 +2,7 @@ NOMBRE
     stopflow
 
 SINTAXIS
-    npm run yeelight stopflow
+    Yeelight>stopflow
 
 DESCRIPCION
     Detiene el modo color flow

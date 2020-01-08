@@ -2,7 +2,7 @@ NOMBRE
     cronadd
 
 SINTAXIS
-    npm run yeelight cronadd [tiempo]
+    Yeelight>cronadd [tiempo]
 
 DESCRIPCION
     Inicia un timer tras el cual se apagará la bombilla. 
@@ -12,7 +12,7 @@ PARAMETROS
     
 EJEMPLO
     Apagar la bombilla después de una hora:
-        - npm run yeelight cronadd 60
+        - Yeelight>cronadd 60
 
 EJEMPLO PETICION ENVIADA
     { id: 0, method: 'cron_add', params: [ 0, 60, 0 ] }

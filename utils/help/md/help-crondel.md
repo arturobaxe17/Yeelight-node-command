@@ -4,7 +4,7 @@
 
 ### SINTAXIS
 ```shell
-npm run yeelight crondel
+Yeelight>crondel
 ```
 
 ### DESCRIPCION

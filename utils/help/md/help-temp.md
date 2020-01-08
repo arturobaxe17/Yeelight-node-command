@@ -4,7 +4,7 @@
 
 ### SINTAXIS
 ```shell
-npm run yeelight temp [temperatura] <{sudden | smooth}> <duration>
+Yeelight>temp [temperatura] <{sudden | smooth}> <duration>
 ```
 
 
@@ -24,14 +24,14 @@ Cambia el color de la luz en función del valor de temperatura introducido.
 ### EJEMPLO COMANDO
 Cambio inmediato de color a azul:
 ```shell
-npm run yeelight temp 6500 
-npm run yeelight temp 6500 sudden
+Yeelight>temp 6500 
+Yeelight>temp 6500 sudden
 ```
 
 
 Cambio de color a rojo con un intervalo de 8 segundos:
 ```shell
-npm run yeelight temp 1700 smooth 8
+Yeelight>temp 1700 smooth 8
 ```
 
 

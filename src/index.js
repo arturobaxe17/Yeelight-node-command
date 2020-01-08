@@ -1,5 +1,5 @@
 module.exports = {
-    client: require('./client'),
+    controller: require('./controller'),
     bulb: require('./bulb'),
     parser: require('./parser')
 }

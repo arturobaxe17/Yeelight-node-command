@@ -3,7 +3,7 @@
 
 ### SINTAXIS
 ```shell
-npm run yeelight hsv [hue] [saturacion] <{sudden | smooth}> <duración>
+Yeelight>hsv [hue] [saturacion] <{sudden | smooth}> <duración>
 ```
 
 ### DESCRIPCION
@@ -25,13 +25,13 @@ Cambia el color de la luz en función del valor de hue y saturación introducido
 ### EJEMPLO
 Cambio inmediato de color a azul:
 ```shell
-npm run yeelight hsv 250 100
-npm run yeelight hsv 250 100 sudden
+Yeelight>hsv 250 100
+Yeelight>hsv 250 100 sudden
 ```
 
 Cambio de color a azul con un intervalo de 3 segundos:
 ```shell
-npm run yeelight hsv 250 100 smooth 3
+Yeelight>hsv 250 100 smooth 3
 ```
 
 
