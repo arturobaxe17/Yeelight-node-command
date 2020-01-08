@@ -6,7 +6,7 @@ class LightBulb extends EventEmitter {
         super();
         this.socket = null;
         this.port = 55443;
-        this.host = host || defaultHost;
+        this.host = host;
         this.connected = false;
     }
 

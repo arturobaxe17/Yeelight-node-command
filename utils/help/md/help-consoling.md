@@ -17,13 +17,13 @@ Por defecto desactivado.
 En caso de que no se especifique el parámetro, se alternará entre activado/desactivado.
 
 ### EJEMPLO
-Cambio de color con 'consoling' desactivado:
+Cambio de color con `consoling` desactivado:
 ```shell
 Yeelight>blue
 Yeelight>Bombilla => ok
 ```
 
-Cambio de color con 'consoling' activado:
+Cambio de color con `consoling` activado:
 ```shell
 Yeelight>blue
 Yeelight>Cliente  => {"id":0,"method":"set_rgb","params":[255]}

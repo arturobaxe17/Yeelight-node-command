@@ -1,0 +1,8 @@
+NOMBRE
+    close
+
+SINTAXIS
+    Yeelight>close
+
+DESCRIPCION
+    Finaliza la conexión con la bombilla y cierra el programa.

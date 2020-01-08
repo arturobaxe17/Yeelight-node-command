@@ -4,13 +4,16 @@ Aplicación creada en node.js para controlar mediante linea de comando bombillas
 
  ## ¿Cómo se utiliza?
 
- En primer lugar, se debe activar la opción de [LAN Control](https://www.yeelight.com/faqs/lan_control).
+En primer lugar, se debe activar la opción de [LAN Control](https://www.yeelight.com/faqs/lan_control).
 
 Los pasos a seguir son los siguientes:
 1. Obtener la dirección IP de la bombilla que se quiere controlar.
-2. En el fichero [client.js](./src/client.js) sustituir el valor `XXX.XXX.X.XXX` con la dirección IP de la bombilla:
+2. En el fichero [config.json](./utils/config/config.json) sustituir el valor `XXX.XXX.X.XXX` con la dirección IP de la bombilla:
     ```javascript
-        let host = 'XXX.XXX.X.XXX';
+    {
+        "consoling": false,
+        "host": "XXX.XXX.X.XXX"
+    }
     ```
 3. Desde la consola nos situariemos en el directorio dónde se encuentre el programa.
 
@@ -24,23 +27,10 @@ Los pasos a seguir son los siguientes:
     ```shell
     Yeelight><comando> [parametros]
     ```
-6. Una vez introducido el comando se mostrarán los siguientes mensajes:
-    1. Mensaje a enviar a la bombilla en formato JSON:
-        ```javascript
-        { id: 0, method: 'set_rgb', params: [ 16744192 ] }
-        ```
-    2. Mensaje de conexión a la bombilla, indicando IP y puerto:
-        ```
-        Yeelight conectada: 192.168.0.100:55443
-        ```
-    3. Mensaje recibido de la bombilla en formato JSON:
-        ```javascript
-        { id: 0, result: [ 'ok' ] }
-        ```
-    4. Mensaje de desconexión de la bombilla:
-        ```
-        Yeelight desconectada
-        ```
+6. Una vez introducido el comando se mostrará la respuesta de la bombilla
+    ```shell
+    Yeelight>Bombilla => 'respuesta'
+    ```
 
 ## Comandos implementados
 
@@ -67,11 +57,12 @@ La lista de comandos implementados se resume en la siguiente tabla:
 | [help](./utils/help/md/help-help.md)           | Muestra la ayuda del programa                                                    |
 | [cls](./utils/help/md/help-cls.md)             | Limpia el contenido de la pantalla                                               |
 | [consoling](./utils/help/md/help-consoling.md) | Controla la habilitación de los mensajes a mostrar en la linea de comandos       |
+| [close](./utils/help/md/help-close.md)         | Finaliza la conexión con la bombilla y cierra el programa                        |
 
 ## Pendiente implementar
 
 - [ ] Permitir introducir los valores para el modo color flow.
 - [ ] Implementar el comando de `set_scene`.
 - [X] Matchear los parámetros solicitados en la función `get` con los valores devueltos por la bombilla.
-- [ ] Fichero de configuración.
-- [ ] Documentar las nuevas funciones `cls` y `consoling`.
+- [X] Fichero de configuración.
+- [X] Documentar las nuevas funciones `cls`, `consoling`, `close`.

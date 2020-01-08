@@ -1,8 +1,11 @@
 const Bulb = require('./bulb.js');
 const Parser = require('./parser.js');
 const Help = require('./help.js');
+const config = require('../utils/config/config.json');
+const defaultHost = '192.168.0.101'
+
 const newLine = '\r\n';
-const host = '192.168.0.101';
+const host = config.host || defaultHost;
 const completions = ['on', 'off', 'setpower',
     'toggle', 'color', 'rgb',
     'red', 'green', 'blue', 'white',
@@ -18,7 +21,7 @@ const cmdCtrl = require('readline').Interface({
     completer
 });
 
-let consoling = false;
+let consoling = config.consoling || false;
 let reqParams = {};
 let getting = false;
 
