@@ -59,15 +59,15 @@ finder.on('finding', () => {
 })
 
 finder.on('found', (host, port, response) => {
-    createBulb(host);
+    createBulb(host, port);
     configuration.host = host;
     configuration.port = port;
     console.log(`Bombilla encontrada: ${host}:${port}`);
     cmdCtrl.prompt();
 });
 
-function createBulb(host) {
-    bulb = new Bulb(host);
+function createBulb(host, port) {
+    bulb = new Bulb(host, port);
 
     bulb.on('connected', (host, port) => {
     //    console.log(`Yeelight conectada: ${host}:${port}`);

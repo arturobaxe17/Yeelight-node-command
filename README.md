@@ -24,6 +24,8 @@ Los pasos a seguir son los siguientes:
     Yeelight><comando> [parametros]
     ```
 
+    Se puede utilizar la función de autocompletar pulsado la tecla `Tab`. Al pulsarla dos veces se muestran todos los comandos implementados.
+
 4. Una vez introducido el comando se mostrará la respuesta de la bombilla
     ```shell
     Yeelight>Bombilla => 'respuesta'

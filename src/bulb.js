@@ -2,10 +2,10 @@ const net = require('net');
 const EventEmitter = require('events');
 
 class LightBulb extends EventEmitter {
-    constructor(host) {
+    constructor(host, port) {
         super();
         this.socket = null;
-        this.port = 55443;
+        this.port = port;
         this.host = host;
         this.connected = false;
     }
