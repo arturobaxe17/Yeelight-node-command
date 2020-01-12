@@ -1,0 +1,9 @@
+NOMBRE
+    options
+
+SINTAXIS 
+    Yeelight>options
+
+
+DESCRIPCION
+    Muestra los parámetros de configuración.

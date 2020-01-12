@@ -1,15 +1,16 @@
 const Bulb = require('./bulb.js');
+const Finder = require('./finder.js');
 const Parser = require('./parser.js');
 const Help = require('./help.js');
 const config = require('../utils/config/config.json');
-const defaultHost = '192.168.0.101';
 const newLine = '\r\n';
 let reqParams = {};
 let getting = false;
+let bulb;
 
 let configuration = {
     consoling: config.config || false,
-    host: config.host || defaultHost
+    host: config.host
 }
 
 const completions = ['on', 'off', 'setpower',
@@ -36,59 +37,77 @@ function completer(line) {
     return [hits && hits.length ? hits : completions, line];
 }
 
-cmdCtrl.prompt();
+//cmdCtrl.prompt();
 
 cmdCtrl.on('line', (line) => {
     parseLine(line);
     cmdCtrl.prompt();
 }).on('close', () => {
-    bulb.disconnect();
+    try {
+        bulb.disconnect();
+    } catch(e){
+        //console.log(e);
+    }
     console.log('Cerrando programa');
     process.exit(0);
 });
 
-const bulb = new Bulb(configuration.host);
+const finder = new Finder();
 
-bulb.on('connected', (host, port) => {
-    // if () {
-    //     console.log(`Yeelight conectada: ${host}:${port}`);
-    // }
-});
-
-bulb.on('request', (request) => {
-    let jRequest = JSON.parse(request);
-    if (configuration.consoling) {
-        cmdCtrl.prompt();
-
-        console.log('\x1b[32m%s%s\x1b[0m', 'Cliente  => ', request.replace(/\s+/g, " "));
-    }
-    if (getting) {
-        reqParams = jRequest.params;
-    }
+finder.on('finding', () => {
+    //console.log('Buscando');
 })
 
-bulb.on('data', (message) => {
-    if (configuration.consoling) {
-        console.log('\x1b[36m%s%s\x1b[0m', 'Bombilla => ', JSON.stringify(message));
-    } else if (message.result && !getting) {
-        console.log('\x1b[36m%s%s\x1b[0m', 'Bombilla => ', message.result.toString());
-    }
-
-    if (getting) {
-        getting = false;
-        console.log('\r');
-        for (let i in message.result) {
-            if (reqParams[i] != '') {
-                console.log('\x1b[36m%s\x1b[0m', `Bombilla => ${reqParams[i]}: ${message.result[i]}`);
-            }
-        }
-    }
+finder.on('found', (host, port, response) => {
+    createBulb(host);
+    configuration.host = host;
+    configuration.port = port;
+    console.log(`Bombilla encontrada: ${host}:${port}`);
     cmdCtrl.prompt();
 });
 
-bulb.on('disconnected', () => {
-    console.log('Yeelight desconectada');
-});
+function createBulb(host) {
+    bulb = new Bulb(host);
+
+    bulb.on('connected', (host, port) => {
+    //    console.log(`Yeelight conectada: ${host}:${port}`);
+    });
+
+    bulb.on('request', (request) => {
+        let jRequest = JSON.parse(request);
+        if (configuration.consoling) {
+            cmdCtrl.prompt();
+
+            console.log('\x1b[32m%s%s\x1b[0m', 'Cliente  => ', request.replace(/\s+/g, " "));
+        }
+        if (getting) {
+            reqParams = jRequest.params;
+        }
+    });
+
+    bulb.on('data', (message) => {
+        if (configuration.consoling) {
+            console.log('\x1b[36m%s%s\x1b[0m', 'Bombilla => ', JSON.stringify(message));
+        } else if (message.result && !getting) {
+            console.log('\x1b[36m%s%s\x1b[0m', 'Bombilla => ', message.result.toString());
+        }
+
+        if (getting) {
+            getting = false;
+            console.log('\r');
+            for (let i in message.result) {
+                if (reqParams[i] != '') {
+                    console.log('\x1b[36m%s\x1b[0m', `Bombilla => ${reqParams[i]}: ${message.result[i]}`);
+                }
+            }
+        }
+        cmdCtrl.prompt();
+    });
+
+    bulb.on('disconnected', () => {
+        console.log('Yeelight desconectada');
+    });
+}
 
 function parseLine(line) {
     let input = line.split(' ');

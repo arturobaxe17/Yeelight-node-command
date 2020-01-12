@@ -1,10 +1,10 @@
-NOMBRE
+### NOMBRE
     options
 
-SINTAXIS
+### SINTAXIS
 ```shell    
 Yeelight>options
 ```
 
-DESCRIPCION
+### DESCRIPCION
 Muestra los parámetros de configuración.

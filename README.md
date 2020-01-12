@@ -9,33 +9,26 @@ La documentación respecto a la comunicación con la bombilla se puede encontrar
 En primer lugar, se debe activar la opción de [LAN Control](https://www.yeelight.com/faqs/lan_control) de la bombilla que se quiere controlar.
 
 Los pasos a seguir son los siguientes:
-1. Obtener la dirección IP de la bombilla que se quiere controlar.
+1. Desde la consola nos situariemos en el directorio dónde se encuentre el programa.
 
-2. En el fichero [config.json](./utils/config/config.json) sustituir el valor `XXX.XXX.X.XXX` con la dirección IP de la bombilla:
-    ```javascript
-    {
-        "consoling": false,
-        "host": "XXX.XXX.X.XXX"
-    }
-    ```
-3. Desde la consola nos situariemos en el directorio dónde se encuentre el programa.
-
-4. Ejecutar uno de los siguientes comandos:
+2. Ejecutar uno de los siguientes comandos:
     ```shell
     prompt>npm start
     prompt>npm run yeelight
     ```
 
-5. Aparecerá el nuevo prompt: `Yeelight>`. Aquí introduciremos el comando que se quiere ejecutar. El formato del comando es:
+3. Automaticamente se buscará la bombilla conectada a la red LAN. Si se ha podido encontrar la bombilla aparecerá el mensaje `Bombilla encontrada: hhhh.hhh.h.hhh:ppppp`. Donde `h` se corresponde con la IP de la bombilla y `p` el puerto.
+
+    Aparecerá el nuevo prompt: `Yeelight>`. Aquí introduciremos el comando que se quiere ejecutar. El formato del comando es:
     ```shell
     Yeelight><comando> [parametros]
     ```
 
-6. Una vez introducido el comando se mostrará la respuesta de la bombilla
+4. Una vez introducido el comando se mostrará la respuesta de la bombilla
     ```shell
     Yeelight>Bombilla => 'respuesta'
     ```
-7. Para finalizar el programa se puede introducir el comando `close` o bien pulsar la combinación de teclas `ctrl+C`.
+5. Para finalizar el programa se puede introducir el comando `close` o bien pulsar la combinación de teclas `ctrl+C`.
 
 ## Comandos implementados
 
@@ -69,6 +62,3 @@ La lista de comandos implementados se resume en la siguiente tabla:
 
 - [ ] Permitir introducir los valores para el modo color flow.
 - [ ] Implementar el comando de `set_scene`.
-- [X] Matchear los parámetros solicitados en la función `get` con los valores devueltos por la bombilla.
-- [X] Fichero de configuración.
-- [X] Documentar las nuevas funciones `cls`, `consoling`, `close`.
