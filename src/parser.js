@@ -17,7 +17,7 @@ const methodDictionary = {
     'hsv': 'set_hsv',
     'startflow': 'start_cf',
     'stopflow': 'stop_cf',
-    'cronadd': 'crond_add',
+    'cronadd': 'cron_add',
     'cronget': 'cron_get',
     'crondel': 'cron_del',
     'adjust': 'set_adjust',
@@ -125,6 +125,7 @@ function parseParams(func, values, object) {
             params.push(0); //Apagar la bombilla, valor fijo
             let minutes = getMinutes(values);
             params.push(minutes);
+            break;
         case 'cronget':
         case 'crondel':
             params.push(0); //Apagar la bombilla, valor fijo
