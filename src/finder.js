@@ -44,9 +44,10 @@ class Finder extends EventEmitter {
         let response = message.toString().split('\r\n');
         if (response[0] == okResponse && !this.found){
             this.found = true;
-            this.foundHost = response[4].substring(21, 34);
-            this.foundPort = response[4].substring(35, 42);
-            this.emit('found', this.foundHost, this.foundPort, response);
+            this.host = response[4].substring(21, 34);
+            this.port = response[4].substring(35, 42);
+            this.name = response[17].substring(6);
+            this.emit('found', this.host, this.port, this.name, response);
         }
     }
 }

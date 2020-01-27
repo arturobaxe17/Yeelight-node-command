@@ -1,6 +1,6 @@
 # Yeelight-node-command
 
-Aplicación creada en node.js para controlar mediante linea de comando bombillas **Yeelight**.
+Aplicación creada en node.js, sin dependencias, para controlar mediante linea de comando bombillas **Yeelight**.
 
 La documentación respecto a la comunicación con la bombilla se puede encontrar [aquí](https://www.yeelight.com/download/Yeelight_Inter-Operation_Spec.pdf).
 
@@ -17,7 +17,13 @@ Los pasos a seguir son los siguientes:
     prompt>npm run yeelight
     ```
 
-3. Automaticamente se buscará la bombilla conectada a la red LAN. Si se ha podido encontrar la bombilla aparecerá el mensaje `Bombilla encontrada: hhhh.hhh.h.hhh:ppppp`. Donde `h` se corresponde con la IP de la bombilla y `p` el puerto.
+3. Automaticamente se buscará la bombilla conectada a la red LAN. Si se ha podido encontrar la bombilla aparecerá el mensaje: 
+
+    ```shell
+    Bombilla encontrada: 'nombre bombilla'
+    Conexión: hhhh.hhh.h.hhh:ppppp
+    ```
+    *Donde `h` se corresponde con la IP de la bombilla y `p` el puerto.*
 
     Aparecerá el nuevo prompt: `Yeelight>`. Aquí introduciremos el comando que se quiere ejecutar. El formato del comando es:
     ```shell

@@ -37,8 +37,6 @@ function completer(line) {
     return [hits && hits.length ? hits : completions, line];
 }
 
-//cmdCtrl.prompt();
-
 cmdCtrl.on('line', (line) => {
     parseLine(line);
     cmdCtrl.prompt();
@@ -58,11 +56,12 @@ finder.on('finding', () => {
     //console.log('Buscando');
 })
 
-finder.on('found', (host, port, response) => {
+finder.on('found', (host, port, name, response) => {
     createBulb(host, port);
     configuration.host = host;
     configuration.port = port;
-    console.log(`Bombilla encontrada: ${host}:${port}`);
+    console.log(`Bombilla encontrada: ${name}`);
+    console.log(`Conexión: ${host}:${port}`);
     cmdCtrl.prompt();
 });
 
@@ -130,6 +129,7 @@ function parseLine(line) {
         } else if (input[1] == 'off') {
             configuration.consoling = false;
         }
+        console.log("Consoling: " + configuration.consoling);
     } else if (input[0] == 'close') {
         bulb.disconnect();
         process.exit(0);
@@ -155,8 +155,3 @@ function createRequest(id, method, params) {
     var jsonRequest = JSON.stringify(request) + newLine;
     bulb.sendRequest(jsonRequest);
 }
-
-// setTimeout(function () {
-//     bulb.disconnect();
-// }, 1000);
-
