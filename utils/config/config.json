@@ -1,4 +1,5 @@
 {
     "consoling": false,
-    "host": "XXX.XXX.X.XXX"
+    "host": "XXX.XXX.X.XXX",
+    "port": 55443
 }

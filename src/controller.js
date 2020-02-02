@@ -2,15 +2,24 @@ const Bulb = require('./bulb.js');
 const Finder = require('./finder.js');
 const Parser = require('./parser.js');
 const Help = require('./help.js');
+const LoadingBar = require('./loadingBar.js');
 const config = require('../utils/config/config.json');
 const newLine = '\r\n';
 let reqParams = {};
 let getting = false;
 let bulb;
+let bulbTries = 0;
+let timeout;
+const retries = 20;
+
+const helper = new Help();
+const progress = new LoadingBar(retries);
+
 
 let configuration = {
     consoling: config.config || false,
-    host: config.host
+    host: config.host,
+    port: config.port
 }
 
 const completions = ['on', 'off', 'setpower',
@@ -43,7 +52,7 @@ cmdCtrl.on('line', (line) => {
 }).on('close', () => {
     try {
         bulb.disconnect();
-    } catch(e){
+    } catch (e) {
         //console.log(e);
     }
     console.log('Cerrando programa');
@@ -53,10 +62,38 @@ cmdCtrl.on('line', (line) => {
 const finder = new Finder();
 
 finder.on('finding', () => {
-    //console.log('Buscando');
-})
+    console.log('Buscando...');
+    retryCast(1000, retries);
+});
+
+function retryCast(interval, retries) {
+    progress.start();
+    timeout = setInterval(() => {
+        bulbTries++;
+
+        progress.step();
+        // console.log('Reintento ' + bulbTries);
+        finder.allCast();
+        if (bulbTries >= retries) {
+            progress.stop();
+            clearInterval(timeout);
+            console.log('No se ha encontrado ninguna bombilla');
+            cmdCtrl.question('Indroduce la IP de la bombilla: ', (answer) => {
+                createBulb(answer, configuration.port);
+                cmdCtrl.prompt();
+            });
+        }
+    }, interval);
+}
 
 finder.on('found', (host, port, name, response) => {
+    try {
+        progress.stop();
+    } catch (e) {
+
+    }
+    clearInterval(timeout);
+    bulbFound = true;
     createBulb(host, port);
     configuration.host = host;
     configuration.port = port;
@@ -69,7 +106,7 @@ function createBulb(host, port) {
     bulb = new Bulb(host, port);
 
     bulb.on('connected', (host, port) => {
-    //    console.log(`Yeelight conectada: ${host}:${port}`);
+        //console.log(`Yeelight conectada: ${host}:${port}`);
     });
 
     bulb.on('request', (request) => {
@@ -118,7 +155,7 @@ function parseLine(line) {
         cmdCtrl.write('\u001B[0;0f');
         cmdCtrl.clearLine(process.stdout, 0);
     } else if (input[0] == 'help') {
-        Help.printHelp(input[1]);
+        helper.printHelp(input[1]);
     } else if (input[0] == 'options') {
         console.log(configuration);
     } else if (input[0] == 'consoling') {
